@@ -4,5 +4,6 @@
 
 <?php
 //testttt
-echo "ik"
+echo "ik";
+echo "hfjvamljafleg";
 ?>
