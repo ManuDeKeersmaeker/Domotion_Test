@@ -20,8 +20,7 @@ Gemaakt door: Manu De Keersmaeker
 </html>
 
 <?php
-if (isset($_POST['SubmitBadgeId']))
-{
+if (isset($_POST['SubmitBadgeId'])) {
     //Wanneer een badge wordt ingescant worden de kasten getoond
     echo "
     <html>
@@ -58,14 +57,11 @@ if (isset($_POST['SubmitBadgeId']))
     ";
     $BadgeId = $_POST['BadgeId'];
     echo $BadgeId;
-}
 
-if (isset($_POST['Kast01']))
-{
-    if($_POST['Kast01'])//Value controleren
-    {
-        $_POST5 = 5; //tset
+    if (isset($_POST['Kast01'])) {
+        $Test = $_POST['Kast01'];
+        echo "$Test";
+        echo "test voor jorben";
     }
 }
-
 ?>
