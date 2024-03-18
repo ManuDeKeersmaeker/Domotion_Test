@@ -62,6 +62,7 @@ if (isset($_POST['SubmitBadgeId'])) {
         $Test = $_POST['Kast01'];
         echo "$Test";
         echo "test voor jorben";
+        echo 'nog testej';
     }
 }
 ?>
