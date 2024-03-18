@@ -5,6 +5,7 @@
 <?php
 //testttt
 echo "ik";
-echo "hfjvamljafleg";
+echo "hfjvamljafdghtehffleg";
 echo "nog een testje voor jorbentje";
+echo "jedrhgirebhuh";
 ?>
