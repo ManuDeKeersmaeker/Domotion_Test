@@ -6,6 +6,11 @@ De kasten zelf vind je in het bestand SchermKasten.php.
 Gemaakt door: Manu De Keersmaeker
 -->
 
+<?php
+session_start();
+$_SESSION['BadgeId'] = null;
+?>
+
 <html>
 <head>
     <title>TestOmgeving</title>
@@ -19,8 +24,3 @@ Gemaakt door: Manu De Keersmaeker
 </form>
 </body>
 </html>
-
-<?php
-session_start();
-$_SESSION['BadgeId'] = $_POST['BadgeId'];
-?>

@@ -113,9 +113,10 @@ if (isset($_POST['StatusKast06'])){
         $_SESSION['StatusKast06'] = "Vol";
     }
 }
-
+if ($_SESSION['BadgeId'] == null){
+    $_SESSION['BadgeId'] =  $_POST['BadgeId'];
+}
 echo $_SESSION['BadgeId'];
-echo "bla bal bla <br>"
 ?>
 
 
@@ -149,6 +150,9 @@ echo "bla bal bla <br>"
             <td><input type = 'submit' name = 'StatusKast06' value = '<?php  echo $_SESSION['StatusKast06'] ?>'></td>
         </tr>
     </table>
+</form>
+<form method="post" action="TestOmgeving.php">
+    <input type="submit" name="GoToBadgeId" value="Ga terug">
 </form>
 </body>
 </html>
