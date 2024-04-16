@@ -15,9 +15,6 @@ Gemaakt door: Manu De Keersmaeker
 <?php
 //Hieronder wordt ervoor gezorgdt dat de inhoud van de kast kan veranderen en dat de kast open en dicht kan.
 session_start();
-if (isset($_POST['BadgeId'])){
-    $BadgeId = $_POST['BadgeId'];
-}
 
 if (isset($_POST['Kast01'])) {
     if ($_POST['Kast01'] == "Gesloten" || $_POST['Kast01'] == null){
@@ -120,6 +117,7 @@ if (isset($_POST['StatusKast06'])){
         $_SESSION['StatusKast06'] = "Vol";
     }
 }
+
 
 if ($_SESSION['BadgeId'] == null){
     $_SESSION['BadgeId'] =  $_POST['BadgeId'];
