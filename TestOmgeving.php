@@ -13,7 +13,7 @@ $_SESSION['BadgeId'] = null;
 
 <html>
 <head>
-    <title>TestOmgeving</title>
+    <title>Geef jouw badge id in</title>
 </head>
 <body>
 <form method="post" action="SchermKasten.php">
