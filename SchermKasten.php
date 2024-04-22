@@ -13,108 +13,167 @@ Gemaakt door: Manu De Keersmaeker
 
 
 <?php
-//Hieronder wordt ervoor gezorgdt dat de inhoud van de kast kan veranderen en dat de kast open en dicht kan.
-session_start();
+$AantalKasten = 1;
 
+//Hieronder wordt ervoor gezorgd dat de inhoud van de kast kan veranderen en dat de kast open en dicht kan.
+session_start();
+/*
 if (isset($_POST['Kast01'])) {
     if ($_POST['Kast01'] == "Gesloten" || $_POST['Kast01'] == null){
         $_SESSION['Kast01'] = "Open";
+        $_SESSION['VorigeKast01'] = "Gesloten";
     }
     else{
     $_SESSION['Kast01'] = "Gesloten";
+    $_SESSION['VorigeKast01'] = "Open";
     }
 }
 if (isset($_POST['StatusKast01'])){
     if ($_POST['StatusKast01'] == "Vol" || $_POST['StatusKast01'] == null){
         $_SESSION['StatusKast01'] = "Leeg";
+        $_SESSION['VorigeStatusKast01'] = "Vol";
     }
     else{
         $_SESSION['StatusKast01'] = "Vol";
+        $_SESSION['VorigeStatusKast01'] = "Leeg";
+    }
+}*/
+for ($Teller = 1; $Teller <= $AantalKasten; $Teller++){
+    if (isset($_POST['Kast'.$Teller])) {
+        if ($_POST['Kast'.$Teller] == "Gesloten" || $_POST['Kast'.$Teller] == null){
+            $_SESSION['Kast'.$Teller] = "Open";
+            $_SESSION['VorigeKast'.$Teller] = "Gesloten";
+        }
+        else{
+            $_SESSION['Kast'.$Teller] = "Gesloten";
+            $_SESSION['VorigeKast'.$Teller] = "Open";
+        }
+    }
+    if (isset($_POST['StatusKast'.$Teller])){
+        if ($_POST['StatusKast'.$Teller] == "Vol" || $_POST['StatusKast'.$Teller] == null){
+            $_SESSION['StatusKast'.$Teller] = "Leeg";
+            $_SESSION['VorigeStatusKast'.$Teller] = "Vol";
+        }
+        else{
+            $_SESSION['StatusKast'.$Teller] = "Vol";
+            $_SESSION['VorigeStatusKast'.$Teller] = "Leeg";
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
 
 if (isset($_POST['Kast02'])) {
     if ($_POST['Kast02'] == "Gesloten" || $_POST['Kast02'] == null){
         $_SESSION['Kast02'] = "Open";
+        $_SESSION['VorigeKast02'] = "Gesloten";
     }
     else{
         $_SESSION['Kast02'] = "Gesloten";
+        $_SESSION['VorigeKast02'] = "Open";
     }
 }
 if (isset($_POST['StatusKast02'])){
     if ($_POST['StatusKast02'] == "Vol" || $_POST['StatusKast02'] == null){
         $_SESSION['StatusKast02'] = "Leeg";
+        $_SESSION['VorigeStatusKast02'] = "Vol";
     }
     else{
         $_SESSION['StatusKast02'] = "Vol";
+        $_SESSION['VorigeStatusKast02'] = "Gesloten";
     }
 }
 
 if (isset($_POST['Kast03'])) {
     if ($_POST['Kast03'] == "Gesloten" || $_POST['Kast03'] == null){
         $_SESSION['Kast03'] = "Open";
+        $_SESSION['VorigeKast03'] = "Gesloten";
     }
     else{
         $_SESSION['Kast03'] = "Gesloten";
+        $_SESSION['VorigeKast03'] = "Open";
     }
 }
 if (isset($_POST['StatusKast03'])){
     if ($_POST['StatusKast03'] == "Vol" || $_POST['StatusKast03'] == null){
         $_SESSION['StatusKast03'] = "Leeg";
+        $_SESSION['VorigeStatusKast03'] = "Vol";
     }
     else{
         $_SESSION['StatusKast03'] = "Vol";
+        $_SESSION['VorigeStatusKast03'] = "Leeg";
     }
 }
 
 if (isset($_POST['Kast04'])) {
     if ($_POST['Kast04'] == "Gesloten" || $_POST['Kast04'] == null){
         $_SESSION['Kast04'] = "Open";
+        $_SESSION['VorigeKast04'] = "Gesloten";
     }
     else{
         $_SESSION['Kast04'] = "Gesloten";
+        $_SESSION['VorigeKast04'] = "Open";
     }
 }
 if (isset($_POST['StatusKast04'])){
     if ($_POST['StatusKast04'] == "Vol" || $_POST['StatusKast04'] == null){
         $_SESSION['StatusKast04'] = "Leeg";
+        $_SESSION['VorigeStatusKast04'] = "Vol";
     }
     else{
         $_SESSION['StatusKast04'] = "Vol";
+        $_SESSION['VorigeStatusKast04'] = "Leeg";
     }
 }
 
 if (isset($_POST['Kast05'])) {
     if ($_POST['Kast05'] == "Gesloten" || $_POST['Kast05'] == null){
         $_SESSION['Kast05'] = "Open";
+        $_SESSION['VorigeKast05'] = "Gesloten";
     }
     else{
         $_SESSION['Kast05'] = "Gesloten";
+        $_SESSION['VorigeKast05'] = "Open";
     }
 }
 if (isset($_POST['StatusKast05'])){
     if ($_POST['StatusKast05'] == "Vol" || $_POST['StatusKast05'] == null){
         $_SESSION['StatusKast05'] = "Leeg";
+        $_SESSION['VorigeStatusKast05'] = "Vol";
     }
     else{
         $_SESSION['StatusKast05'] = "Vol";
+        $_SESSION['VorigeStatusKast05'] = "Leeg";
     }
 }
 
 if (isset($_POST['Kast06'])) {
     if ($_POST['Kast06'] == "Gesloten" || $_POST['Kast06'] == null){
         $_SESSION['Kast06'] = "Open";
+        $_SESSION['VorigeKast06'] = "Gesloten";
     }
     else{
         $_SESSION['Kast06'] = "Gesloten";
+        $_SESSION["VorigeKast06"] = "Open";
     }
 }
 if (isset($_POST['StatusKast06'])){
     if ($_POST['StatusKast06'] == "Vol" || $_POST['StatusKast06'] == null){
         $_SESSION['StatusKast06'] = "Leeg";
+        $_SESSION['VorigeStatusKast06'] = "Vol";
     }
     else{
         $_SESSION['StatusKast06'] = "Vol";
+        $_SESSION['VorigeStatusKast06'] = "Leeg";
     }
 }
 
@@ -131,6 +190,7 @@ if ($_SESSION['KleurKast01'] == null){
     $_SESSION['KleurKast05'] = "green";
     $_SESSION['KleurKast06'] = "green";
 }
+include ('DetectieKasten.php');
 ?>
 
 
