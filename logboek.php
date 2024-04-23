@@ -1,4 +1,7 @@
 <?php
+/*  Dit is de code voor de insert statement zelf die de gegevens naar het logboek stuurt, deze is nog niet gekoppeld
+    met de functie bij de testomgeving voor de kasten.
+*/
 echo '<h2>Domotion Logboek</h2>';
 include "verbindingDB.php";
 session_start();

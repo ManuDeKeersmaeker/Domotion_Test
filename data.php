@@ -47,19 +47,6 @@ echo <<<EOT
 
 EOT;
 
-$soort = "test";
-if (isset($_POST['knop1']))
-{ $soort = "Mensen";}
-else {
-    if (isset($_POST['knop2']))
-    {
-        $soort = "Kasten";
-    } else {
-        $soort = "Logboek";
-    }
-}
-$_SESSION['soort'] = $soort;
-
 echo '<form action="index.html" method="post">';
 echo	'<input type="submit" name="home" value="home"/>';
 echo'</form>';
