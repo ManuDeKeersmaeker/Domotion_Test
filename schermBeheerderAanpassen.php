@@ -1,16 +1,18 @@
+<!-- Jorben Wauters     Domotion        nr.:10 -->
+
 <html>
 <form method='post' >
     Menu:<br>
-    <select name='menu' onchange="redirectToPage(this.value)">
+    <select name='menu' onchange="redirectToPage(this.value)">      <!-- bij verandering, de geselecteerde waarde (value) meegeven -->
         <option value='schermBeheerderToevoegen.php'<?php //if ($_POST['menu'] == 'Toevoegen') echo 'selected="selected"'; ?> >Toevoegen </option>
         <option value='schermBeheerderAanpassen.php' selected<?php //if ($_POST['menu'] == 'Aanpassen') echo 'selected="selected"'; ?> >Aanpassen </option>
         <option value='schermBeheerderVerwijderen.php'<?php //if ($_POST['menu'] == 'Verwijderen') echo 'selected="selected"'; ?> >Verwijderen </option>
     </select><br><br>
 
     <script>
-        function redirectToPage(url) {
+        function redirectToPage(url) {  <!--gebruiker naar url sturen -->
             if (url) {
-                window.location.href = url;
+                window.location.href = url;     <!-- als er een url is dan openen, url is afkomstig van de value van de geselecteerde optsie (aanpassen, toevoe...) -->
             }
         }
     </script>
@@ -45,6 +47,7 @@ if ($link)
         $row  = mysqli_fetch_assoc($resultaat); //vervang fetch_row door fetch_assoc
         if($row != null)
         {
+            session_start();
             echo '<form method="post" ><select name="gebruiker" onchange="this.form.submit()">';
             while ($row  = mysqli_fetch_assoc($resultaat)){
                 //5d: toon resultaat
@@ -54,7 +57,12 @@ if ($link)
 
                 //echo "<br> de naam van de klant is ".$achternaam1.$voornaam1." <br>";
 
-                echo "<option value='$badgenummer1'>$achternaam1 $voornaam1</option>";
+                echo "<option value='$badgenummer1'";
+                if($badgenummer1 == $_SESSION['Badgeselected']){
+                /*if(isset($BadgeSelected) && $badgenummer1 == $BadgeSelected){*/
+                    echo "selected";
+                }
+                echo ">$achternaam1 $voornaam1</option>";
 
 
             }
@@ -75,6 +83,7 @@ if ($link)
     mysqli_close($link);
 }
 if(isset($_POST['gebruiker']) && $_POST['gebruiker'] != "") {
+    $_SESSION['Badgeselected'] = $_POST['gebruiker'];
     $BadgeSelcted = $_POST['gebruiker'];
 }
 
@@ -98,7 +107,7 @@ if ($link)
     if(mysqli_stmt_prepare($statement, $query))
     {
         //4c: parameter een waarde geven (= vraagteken vervangen)
-        mysqli_stmt_bind_param($statement, 's',  $badgenummer1);
+        mysqli_stmt_bind_param($statement, 's',  $BadgeSelcted);
 
         //5a: statement uitvoeren
         mysqli_stmt_execute($statement);
