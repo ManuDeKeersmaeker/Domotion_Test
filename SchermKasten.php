@@ -13,8 +13,8 @@ Gemaakt door: Manu De Keersmaeker
 
 
 <?php
-$_SESSION['AantalKasten'] = 6;
 session_start();
+$_SESSION['AantalKasten'] = 6;
 
 //Hieronder wordt ervoor gezorgd dat de inhoud van de kast kan veranderen en dat de kast open en dicht kan.
 //----------------------------------------------------------------------------------------------------------------------
