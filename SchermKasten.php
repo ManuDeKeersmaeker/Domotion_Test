@@ -55,10 +55,13 @@ if ($_SESSION['BadgeId'] == null){
     $_SESSION['BadgeId'] =  $_POST['BadgeId'];
 }
 
-//include ('DetectieKasten.php');
+//Het importeren van de code uit een andere php file
+//----------------------------------------------------------------------------------------------------------------------
+include ('DetectieKasten.php');
 ?>
 
-
+<!--Het maken van de kasten visueel -->
+<!--------------------------------------------------------------------------------------------------------------------->
 <html>
 <body>
 <form method='post'>
