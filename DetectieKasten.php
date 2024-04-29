@@ -1,6 +1,11 @@
 <!--
-In dit project wordt er gekeken of er een interactie gebeurd is met de kasten. Wanneer dit gebeurd
-wordt dit in een ander project naar de database geschreven.
+In dit project wordt er gekeken of er een interactie gebeurd is met de kasten. Wanneer een kast geopend wordt wordt de
+datum en tijd opgeslagen in variabelen. Wanneer de kast gesloten wordt, wordt er geschreven naar de database. Dit wordt
+gedaan aan de hand van een functie 'SchrijvenNaarDatabase' die men in het bestand 'logboek.php' vindt.
+
+Handige variabelen (Vul op xx in de kastnummer in (bv: 1, 2 ,..., 10, 11)):
+$_SESSION['DatumKast'.$Teller] ==> Dit is de datum van wanneer de kast geopend wordt.
+$_SESSION['TijdKast'.$Teller] ==> Dit is de tijd van wanneer de kast geopend wordt.
 
 Gemaakt door: Manu De Keersmaeker
 -->
@@ -8,63 +13,29 @@ Gemaakt door: Manu De Keersmaeker
 <?php
 //Hier wordt gecontroleerd of de kast deur geopend of gesloten wordt.
 //----------------------------------------------------------------------------------------------------------------------
-if ($_SESSION['VorigeKast01'] == "Gesloten" && $_SESSION['Kast01'] == "Open"){
-    $_SESSION['VorigeKast01'] = "Open";
-    $Kast01_Geopend = true;
-}
-if ($_SESSION['VorigeKast01'] == "Open" && $_SESSION['Kast01'] == "Gesloten"){
-    $_SESSION['VorigeKast01'] = "Gesloten";
-    $Kast01_Sluiten = true;
-}
-
-if ($_SESSION['VorigeKast02'] == "Gesloten" && $_SESSION['Kast02'] == "Open"){
-    $_SESSION['VorigeKast02'] = "Open";
-    $Kast02_Geopend = true;
-}
-if ($_SESSION['VorigeKast02'] == "Open" && $_SESSION['Kast02'] == "Gesloten"){
-    $_SESSION['VorigeKast02'] = "Gesloten";
-    $Kast02_Sluiten = true;
-}
-
-if ($_SESSION['VorigeKast03'] == "Gesloten" && $_SESSION['Kast03'] == "Open"){
-    $_SESSION['VorigeKast03'] = "Open";
-    $Kast03_Geopend = true;
-}
-if ($_SESSION['VorigeKast03'] == "Open" && $_SESSION['Kast03'] == "Gesloten"){
-    $_SESSION['VorigeKast03'] = "Gesloten";
-    $Kast03_Sluiten = true;
-}
-
-if ($_SESSION['VorigeKast04'] == "Gesloten" && $_SESSION['Kast04'] == "Open"){
-    $_SESSION['VorigeKast04'] = "Open";
-    $Kast04_Geopend = true;
-}
-if ($_SESSION['VorigeKast04'] == "Open" && $_SESSION['Kast04'] == "Gesloten"){
-    $_SESSION['VorigeKast04'] = "Gesloten";
-    $Kast04_Sluiten = true;
-}
-
-if ($_SESSION['VorigeKast05'] == "Gesloten" && $_SESSION['Kast05'] == "Open"){
-    $_SESSION['VorigeKast05'] = "Open";
-    $Kast05_Geopend = true;
-}
-if ($_SESSION['VorigeKast05'] == "Open" && $_SESSION['Kast05'] == "Gesloten"){
-    $_SESSION['VorigeKast05'] = "Gesloten";
-    $Kast05_Sluiten = true;
-}
-
-if ($_SESSION['VorigeKast06'] == "Gesloten" && $_SESSION['Kast06'] == "Open"){
-    $_SESSION['VorigeKast06'] = "Open";
-    $Kast06_Geopend = true;
-}
-if ($_SESSION['VorigeKast06'] == "Open" && $_SESSION['Kast06'] == "Gesloten"){
-    $_SESSION['VorigeKast06'] = "Gesloten";
-    $Kast06_Sluiten = true;
+for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++) {
+    if ($_SESSION['VorigeKast' . $Teller] == "Gesloten" && $_SESSION['Kast' . $Teller] == "Open") {
+        $_SESSION['VorigeKast' . $Teller] = "Open";
+        $_SESSION['Kast' . $Teller . '_Geopend'] = true;
+    }
+    if ($_SESSION['VorigeKast' . $Teller] == "Open" && $_SESSION['Kast' . $Teller] == "Gesloten") {
+        $_SESSION['VorigeKast' . $Teller] = "Gesloten";
+        $_SESSION['Kast' . $Teller . '_Sluiten'] = true;
+    }
 }
 
 //Hier worden de variabelen (tijd en datum) opgeslagen.
 //----------------------------------------------------------------------------------------------------------------------
-if ($Kast01_Geopend){
-
+for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
+    if ($_SESSION['Kast'.$Teller.'_Geopend'] == true){
+        $_SESSION['DatumKast'.$Teller] = date("Y-m-d");
+        $_SESSION['TijdKast'.$Teller] = date("H:i");
+        $_SESSION['Kast'.$Teller.'_Geopend'] = false;
+    }
+    if ($_SESSION['Kast'.$Teller.'_Sluiten'] == true){
+        include ('logboek.php');
+        SchrijvenNaarDatabase($Teller);
+        $_SESSION['Kast'.$Teller.'_Sluiten'] = false;
+    }
 }
 ?>

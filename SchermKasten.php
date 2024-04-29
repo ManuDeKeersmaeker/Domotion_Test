@@ -13,12 +13,12 @@ Gemaakt door: Manu De Keersmaeker
 
 
 <?php
-$AantalKasten = 6;
+$_SESSION['AantalKasten'] = 6;
 session_start();
 
 //Hieronder wordt ervoor gezorgd dat de inhoud van de kast kan veranderen en dat de kast open en dicht kan.
 //----------------------------------------------------------------------------------------------------------------------
-for ($Teller = 1; $Teller <= $AantalKasten; $Teller++){
+for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
     if (isset($_POST['Kast'.$Teller])) {
         if ($_POST['Kast'.$Teller] == "Open" || $_POST['Kast'.$Teller] == null){
             $_SESSION['Kast'.$Teller] = "Gesloten";
@@ -44,7 +44,7 @@ for ($Teller = 1; $Teller <= $AantalKasten; $Teller++){
 //Hier wordt ervoor gezorgd dat de kasten allemaal in het begin van het programma actief worden gesteld.
 //----------------------------------------------------------------------------------------------------------------------
 if ($_SESSION['KleurKast1'] == null){
-    for ($Teller = 1; $Teller <= $AantalKasten; $Teller++){
+    for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
         $_SESSION['KleurKast'.$Teller] = "green";
     }
 }
@@ -65,7 +65,7 @@ if ($_SESSION['BadgeId'] == null){
     <h3>Kasten</h3>
     <table border = 5>
         <?php
-        for ($Teller = 1; $Teller <= $AantalKasten; $Teller++){
+        for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
             echo "
             <tr>
                 <td>Kast {$Teller}</td>
