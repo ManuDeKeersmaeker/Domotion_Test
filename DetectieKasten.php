@@ -24,7 +24,8 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++) {
     }
 }
 
-//Hier worden de variabelen (tijd en datum) opgeslagen.
+//Hier worden de variabelen (tijd en datum) opgeslagen en wordt er vewezen naar een functie in een ander bestand als de
+//kastdeur gesloten wordt.
 //----------------------------------------------------------------------------------------------------------------------
 for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
     if ($_SESSION['Kast'.$Teller.'_Geopend'] == true){
