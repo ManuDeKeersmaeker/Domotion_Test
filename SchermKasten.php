@@ -17,7 +17,7 @@ Gemaakt door: Manu De Keersmaeker
 //----------------------------------------------------------------------------------------------------------------------
 session_start();
 include ('verbindingDB.php');
-$_SESSION['AantalKasten'] = 6;
+$_SESSION['AantalKasten'] = 2;
 
 //Hieronder wordt ervoor gezorgd dat de inhoud van de kast kan veranderen en dat de kast open en dicht kan.
 //----------------------------------------------------------------------------------------------------------------------
@@ -41,14 +41,20 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
             $_SESSION['StatusKast'.$Teller] = "Leeg";
             $_SESSION['VorigeStatusKast'.$Teller] = "Vol";
         }
+
         //Verbinding naar de database (past 'in_de_kast' aan in de tabel 'kasten'
+        $inhoud = 0;
+        if ($_SESSION['StatusKast'.$Teller] == "Vol") {
+            $inhoud = 1;
+        }
         if($link){
-            $query = "update customers set in_de_kast = ? where kastid = ?";
+            $query = "update kasten set in_de_kast = ? where kastid = ?";
             $stmt = mysqli_stmt_init($link);
-            if (mysqli_stmt_prepare($stmt, $query)){
-                mysqli_stmt_bind_param($stmt, 'si', $_SESSION['StatusKast'.$Teller], $Teller);
+            if (mysqli_stmt_prepare($stmt, $query)) {
+                mysqli_stmt_bind_param($stmt, 'ii', $inhoud, $Teller);
+
+
             }
-            mysqli_close($link);
             if (mysqli_stmt_execute($stmt)){
                 echo "Aanpassing gelukt!!";
             }
@@ -56,6 +62,7 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
                 echo "Aanpassing niet gelukt :(";
                 echo mysql_stmt_error($stmt);
             }
+            mysqli_close($link);
         }
     }
 }
