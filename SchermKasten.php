@@ -13,13 +13,16 @@ Gemaakt door: Manu De Keersmaeker
 
 
 <?php
+//Het importeren van de code uit een ander php file & het aantal kasten instellen
+//----------------------------------------------------------------------------------------------------------------------
 session_start();
+include ('verbindingDB.php');
 $_SESSION['AantalKasten'] = 6;
 
 //Hieronder wordt ervoor gezorgd dat de inhoud van de kast kan veranderen en dat de kast open en dicht kan.
 //----------------------------------------------------------------------------------------------------------------------
 for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
-    if (isset($_POST['Kast'.$Teller])) {
+    if (isset($_POST['Kast'.$Teller])) {    
         if ($_POST['Kast'.$Teller] == "Open" || $_POST['Kast'.$Teller] == null){
             $_SESSION['Kast'.$Teller] = "Gesloten";
             $_SESSION['VorigeKast'.$Teller] = "Open";
@@ -37,6 +40,22 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
         else{
             $_SESSION['StatusKast'.$Teller] = "Leeg";
             $_SESSION['VorigeStatusKast'.$Teller] = "Vol";
+        }
+        //Verbinding naar de database (past 'in_de_kast' aan in de tabel 'kasten'
+        if($link){
+            $query = "update customers set in_de_kast = ? where kastid = ?";
+            $stmt = mysqli_stmt_init($link);
+            if (mysqli_stmt_prepare($stmt, $query)){
+                mysqli_stmt_bind_param($stmt, 'si', $_SESSION['StatusKast'.$Teller], $Teller);
+            }
+            mysqli_close($link);
+            if (mysqli_stmt_execute($stmt)){
+                echo "Aanpassing gelukt!!";
+            }
+            else{
+                echo "Aanpassing niet gelukt :(";
+                echo mysql_stmt_error($stmt);
+            }
         }
     }
 }
