@@ -49,6 +49,7 @@ if ($link)
         {
             session_start();
             echo '<form method="post" ><select name="gebruiker" onchange="this.form.submit()">';
+            mysqli_data_seek($resultaat, 0);    //zet $resultaat terug op het begin
             while ($row  = mysqli_fetch_assoc($resultaat)){
                 //5d: toon resultaat
                 $badgenummer1 = $row["badgenummer"];

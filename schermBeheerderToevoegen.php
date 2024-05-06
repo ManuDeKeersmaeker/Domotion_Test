@@ -26,7 +26,7 @@ echo '<form method="post">
                     <input type="text" name="Achternaam" ><br>
                     <lable>Voornaam:</lable>
                     <input type="text" name="Voornaam" ><br>
-                    <lable>Badge nummer*:</lable>
+                    <lable>Badge nummer:</lable>
                     <input type="text" name="BadgeNummer" ><br>
                     <lable>Telefoonnummer*:</lable>
                     <input type="number" name="Telefoonnummer" ><br>
@@ -34,7 +34,7 @@ echo '<form method="post">
                     <input type="text" name="Rol" ><br>
                     <lable>Wachtwoord*:</lable>
                     <input type="text" name="Wachtwoord" ><br><br>
-                    <input type="submit" value="pas aan" name="cmdVerstuur" >
+                    <input type="submit" value="Toevoegen" name="cmdVerstuur" >
                 </form>';
 echo "* --> optioneel <br>";
 
