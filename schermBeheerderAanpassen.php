@@ -52,14 +52,14 @@ if ($link)
             mysqli_data_seek($resultaat, 0);    //zet $resultaat terug op het begin
             while ($row  = mysqli_fetch_assoc($resultaat)){
                 //5d: toon resultaat
-                $badgenummer1 = $row["badgenummer"];
+                $gebruikerid1 = $row["gebruikerid"];
                 $voornaam1 = $row["voornaam"];
                 $achternaam1 = $row["achternaam"];
 
                 //echo "<br> de naam van de klant is ".$achternaam1.$voornaam1." <br>";
 
-                echo "<option value='$badgenummer1'";
-                if($badgenummer1 == $_SESSION['Badgeselected']){
+                echo "<option value='$gebruikerid1'";
+                if($gebruikerid1 == $_SESSION['Idselected']){
                 /*if(isset($BadgeSelected) && $badgenummer1 == $BadgeSelected){*/
                     echo "selected";
                 }
@@ -84,8 +84,9 @@ if ($link)
     mysqli_close($link);
 }
 if(isset($_POST['gebruiker']) && $_POST['gebruiker'] != "") {
-    $_SESSION['Badgeselected'] = $_POST['gebruiker'];
-    $BadgeSelcted = $_POST['gebruiker'];
+    $_SESSION['Idselected'] = $_POST['gebruiker'];
+    $IdSelcted = $_POST['gebruiker'];
+    echo $IdSelcted;
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -98,8 +99,7 @@ if ($link)
 {
     //3: opbouw van de query
     //query met een parameter
-    $query = 'select * from gebruikers where badgenummer=?';
-    echo $query.'<br>';
+    $query = 'select * from gebruikers where gebruikerid=?';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -108,7 +108,7 @@ if ($link)
     if(mysqli_stmt_prepare($statement, $query))
     {
         //4c: parameter een waarde geven (= vraagteken vervangen)
-        mysqli_stmt_bind_param($statement, 's',  $BadgeSelcted);
+        mysqli_stmt_bind_param($statement, 's',  $IdSelcted);
 
         //5a: statement uitvoeren
         mysqli_stmt_execute($statement);
@@ -149,53 +149,59 @@ if ($link)
     mysqli_close($link);
 }
 //-------------------------------------------------------------------------------
-/*
-//1: verbinding meken met de database
-include ('verbindingDB.php');
+
+if(isset($_POST['cmdVerstuur'])){
+    //1: verbinding meken met de database
+    include ('verbindingDB.php');
 
 //2: als de verbinding gelukt is
-if ($link)
-{
-    //3: opbouw van de query
-    //query met een parameter
-    $query = 'insert into gebruikers(achternaam, voornaam, badgenummer, telefoonnr, rol, wachtwoord) values (?,?,?,?,?,?)';
-
-    //4a: statement initialiseren op basis van de verbinding
-    $statement = mysqli_stmt_init($link);
-
-    //4b: prepared statement maken op basis van de query en het statement
-    if(mysqli_stmt_prepare($statement, $query))
+    if ($link)
     {
-        //4c: parameter een waarde geven (= vraagteken vervangen)
-        mysqli_stmt_bind_param($statement, 'ssssss',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $wachtwoord);
+        //3: opbouw van de query
+        //query met een parameter
+        //$query = 'insert into update gebruikers(achternaam, voornaam, badgenummer, telefoonnr, rol, wachtwoord) values (?,?,?,?,?,?)';
+        $query = 'UPDATE gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ?, wachtwoord = ? WHERE gebruikerid = ?';
 
-        $achternaam = $_POST['Achternaam'];
-        $voornaam = $_POST['Voornaam'];
-        $badgenummer = $_POST['BadgeNummer'];
-        $telefoonnr = $_POST['Telefoonnummer'];
-        $rol= $_POST['Rol'];
-        $wachtwoord = $_POST['Wachtwoord'];
+        //4a: statement initialiseren op basis van de verbinding
+        $statement = mysqli_stmt_init($link);
 
-
-        //5a: statement uitvoeren
-        if (mysqli_stmt_execute($statement))
+        //4b: prepared statement maken op basis van de query en het statement
+        if(mysqli_stmt_prepare($statement, $query))
         {
-            echo 'gebruiker is toegevoegd';
+            //4c: parameter een waarde geven (= vraagteken vervangen)
+            mysqli_stmt_bind_param($statement, 'ssssssi',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $wachtwoord, $IdSelcted);
+
+            $achternaam = $_POST['Achternaam'];
+            echo $achternaam;
+            echo $IdSelcted;
+            $voornaam = $_POST['Voornaam'];
+            $badgenummer = $_POST['BadgeNummer'];
+            $telefoonnr = $_POST['Telefoonnummer'];
+            $rol= $_POST['Rol'];
+            $wachtwoord = $_POST['Wachtwoord'];
+
+
+            //5a: statement uitvoeren
+            if (mysqli_stmt_execute($statement))
+            {
+                echo 'gebruiker is aangepast';
+            }
+            else
+            {
+                echo 'gebruiker is niet aangepast'.mysqli_stmt_error($statement);
+            }
+
         }
         else
         {
-            echo 'insert niet gelukt'.mysqli_stmt_error($statement);
+            echo mysqli_stmt_error($statement);
         }
 
-    }
-    else
-    {
-        echo mysqli_stmt_error($statement);
-    }
 
-
-    //6: verbinding sluiten
-    mysqli_close($link);
+        //6: verbinding sluiten
+        mysqli_close($link);
+    }
 }
-*/
+
+
 ?>
