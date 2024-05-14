@@ -24,13 +24,13 @@ include ('verbindingDB.php');
 //----------------------------------------------------------------------------------------------------------------------
 for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
     if (isset($_POST['Kast'.$Teller])) {    
-        if ($_POST['Kast'.$Teller] == "Open" || $_POST['Kast'.$Teller] == null){
-            $_SESSION['Kast'.$Teller] = "Gesloten";
-            $_SESSION['VorigeKast'.$Teller] = "Open";
-        }
-        else{
+        if ($_POST['Kast'.$Teller] == "Gesloten" || $_POST['Kast'.$Teller] == null){
             $_SESSION['Kast'.$Teller] = "Open";
             $_SESSION['VorigeKast'.$Teller] = "Gesloten";
+        }
+        else{
+            $_SESSION['Kast'.$Teller] = "Gesloten";
+            $_SESSION['VorigeKast'.$Teller] = "Open";
         }
     }
     if (isset($_POST['StatusKast'.$Teller])){
