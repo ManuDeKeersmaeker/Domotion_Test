@@ -16,8 +16,9 @@ Gemaakt door: Manu De Keersmaeker
 //Het importeren van de code uit een ander php file & het aantal kasten instellen
 //----------------------------------------------------------------------------------------------------------------------
 session_start();
-include ('verbindingDB.php');
 $_SESSION['AantalKasten'] = 2;
+include ('verbindingDB.php');
+
 
 //Hieronder wordt ervoor gezorgd dat de inhoud van de kast kan veranderen en dat de kast open en dicht kan.
 //----------------------------------------------------------------------------------------------------------------------
@@ -42,13 +43,13 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
             $_SESSION['VorigeStatusKast'.$Teller] = "Vol";
         }
 
-        //Verbinding naar de database (past 'in_de_kast' aan in de tabel 'kasten'
+        //Verbinding naar de database (past 'in_de_kast' aan in de tabel 'kasten')
         $inhoud = 0;
         if ($_SESSION['StatusKast'.$Teller] == "Vol") {
             $inhoud = 1;
         }
         if($link){
-            $query = "update lockers_kasten set in_de_kast = ? where kastid = ?";
+            $query = "update kasten set in_de_kast = ? where kastid = ?";
             $stmt = mysqli_stmt_init($link);
             if (mysqli_stmt_prepare($stmt, $query)) {
                 mysqli_stmt_bind_param($stmt, 'ii', $inhoud, $Teller);
