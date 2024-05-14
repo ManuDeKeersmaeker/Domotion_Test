@@ -15,23 +15,27 @@ echo <<<EOT
                     <h2>Naar de producten</h2>
                     <div class="line-dec"></div>
                     <!-- tonen van de knoppen die naar producten gaan -->
-                    <form method="post" action="index.php">
+                     <form method="post" action="schermBeheerder.php">
                         <div class="container">
                             <div class="horizontal-center">
-                                <input type="submit" value="Alle producten" name="knop1" class="keuze-button"/>
+                                 <input type="submit" value="Mensen beheren" name="knop1" class="keuze-button"/>
                             </div>
                         </div>
-                        <div class="container">
-                            <div class="horizontal-center">
-                                <input type="submit" value="GTI kleding" name="knop2" class="keuze-button"/>
-                            </div>
-                        </div>
-                        <div class="container">
-                            <div class="horizontal-center">
-                                <input type="submit" value="Andere Kleding" name="knop3" class="keuze-button"/>
-                            </div>
-                        </div>
-                    </form>
+                     </form>
+                     <form method="post" action="TestOmgeving.php">
+                         <div class="container">
+                             <div class="horizontal-center">
+                                 <input type="submit" value="Kasten beheren" name="knop2" class="keuze-button"/>
+                             </div>
+                         </div>
+                     </form>
+                     <form method="post" action="logboek.php">
+                      <div class="container">
+                          <div class="horizontal-center">
+                              <input type="submit" value="Logboek" name="knop3" class="keuze-button"/>
+                         </div>
+                     </div>
+                     </form>
                 </div>
             </div>
         </div>
@@ -45,21 +49,19 @@ EOT;
 
 $soort = "test";
 if (isset($_POST['knop1']))
-{ $soort = "alles";}
+{ $soort = "Mensen";}
 else {
     if (isset($_POST['knop2']))
     {
-        $soort = "GTI";
+        $soort = "Kasten";
     } else {
-        $soort = "andere";
+        $soort = "Logboek";
     }
 }
 $_SESSION['soort'] = $soort;
 
-//echo $_SESSION['soort'];
-// Page is set to home (home.php) by default, so when the visitor visits that will be the page they see.
-$page = isset($_GET['page']) && file_exists($_GET['page'] . '.php') ? $_GET['page'] : 'home';
-// Include and show the requested page
-include $page . '.php';
+echo '<form action="index.html" method="post">';
+echo	'<input type="submit" name="home" value="home"/>';
+echo'</form>';
 
 ?>
