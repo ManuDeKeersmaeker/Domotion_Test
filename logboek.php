@@ -1,7 +1,6 @@
 <?php
 echo '<h2>Domotion Logboek</h2>';
 include "verbindingDB.php";
-session_start();
     if ($stmt = $link->prepare('INSERT INTO logboek (idkast, idgebruiker, datum, time, actie) VALUES (?, ?, ?, ?, ?)')) {
         //Er mogen geen leesbare ww opgeslagen worden, het ww wordt gehashed opgeslagen en steeds
         //gehashed geverifieerd.
