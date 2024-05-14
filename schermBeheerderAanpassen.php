@@ -48,7 +48,15 @@ if ($link)
         if($row != null)
         {
             session_start();
-            echo '<form method="post" ><select name="gebruiker" onchange="this.form.submit()">';
+
+            echo "<script>
+function OnSelectionChange()
+{
+    alert('OK IT WORKS');
+}
+</script>";
+
+            echo '<form method="post" ><select name="gebruiker" onchange="OnSelectionChange()/*this.form.submit()*/">';
             mysqli_data_seek($resultaat, 0);    //zet $resultaat terug op het begin
             while ($row  = mysqli_fetch_assoc($resultaat)){
                 //5d: toon resultaat
@@ -59,15 +67,22 @@ if ($link)
                 //echo "<br> de naam van de klant is ".$achternaam1.$voornaam1." <br>";
 
                 echo "<option value='$gebruikerid1'";
-                if($gebruikerid1 == $_SESSION['Idselected']){
-                /*if(isset($BadgeSelected) && $badgenummer1 == $BadgeSelected){*/
-                    echo "selected";
+
+                if (isset($_SESSION['Idselected'])){
+                    if($gebruikerid1 == $_SESSION['Idselected']){
+                        /*if(isset($BadgeSelected) && $badgenummer1 == $BadgeSelected){*/
+                        echo "selected";
+                    }
                 }
                 echo ">$achternaam1 $voornaam1</option>";
-
-
             }
             echo '</select><br><br></form>';
+            echo $gebruikerid1;
+            echo '<br>';
+            if (isset($_SESSION['Idselected'])){
+                echo $_SESSION['Idselected'];
+                echo '<br>';
+            }
         }
         else
         {
@@ -90,7 +105,16 @@ if(isset($_POST['gebruiker']) && $_POST['gebruiker'] != "") {
 }
 
 //------------------------------------------------------------------------------------------------------
+?>
 
+<script>
+    function OnSelectionChange()
+    {
+        alert("OK IT WORKS");
+    }
+</script>
+
+<?php
 //1: verbinding meken met de database
 include ('verbinding.php');
 
@@ -202,6 +226,19 @@ if(isset($_POST['cmdVerstuur'])){
         mysqli_close($link);
     }
 }
-
-
+/*if (isset($_SESSION['Herlaad'])){
+    if ($_SESSION['Herlaad'] == 1){
+        $_SESSION['Herlaad'] = 0;
+        echo 0000;
+        header( 'location: '.$_SERVER['PHP_SELF']);
+    }
+    else{
+        $_SESSION['Herlaad'] = 1;
+        echo 1111;
+    }
+}
+else {
+    echo 11111111112;
+    $_SESSION['Herlaad'] = 1;
+}*/
 ?>
