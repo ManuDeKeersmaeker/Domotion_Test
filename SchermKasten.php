@@ -11,7 +11,6 @@ $_SESSION['StatusKastxx'] ==> Dit geeft aan of de kast "Leeg" of "Vol" is.
 Gemaakt door: Manu De Keersmaeker
 -->
 
-
 <?php
 //Het importeren van de code uit een ander php file & het aantal kasten instellen
 //----------------------------------------------------------------------------------------------------------------------

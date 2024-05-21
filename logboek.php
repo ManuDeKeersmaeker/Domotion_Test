@@ -31,13 +31,10 @@ function SchrijvenNaarDatabase($Teller)
                 $actie = 1;
             }
             */
-
             //echo 'insert';
                 $stmt->bind_param('iissi', $kastid, $gebruikerid, $date, $tijd, $actie);
                 $stmt->execute();
-
         }
-
         $stmt->close();
     }
     $link->close();
