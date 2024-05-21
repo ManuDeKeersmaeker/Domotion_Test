@@ -48,15 +48,10 @@ if ($link)
         if($row != null)
         {
             session_start();
-            echo "<script>
-function OnSelectionChange()
-{
-    alert('OK IT WORKS');
-}
-</script>";
 
-            echo '<form method="post" ><select name="gebruiker" onchange="OnSelectionChange()/*this.form.submit()*/">';
+            echo '<form method="post" ><select name="gebruiker" onchange="/*OnSelectionChange()*/this.form.submit()">';
             mysqli_data_seek($resultaat, 0);    //zet $resultaat terug op het begin
+            echo "<option value='' selected>Selecteer persoon</option>";
             while ($row  = mysqli_fetch_assoc($resultaat)){
                 //5d: toon resultaat
                 $gebruikerid1 = $row["gebruikerid"];
@@ -67,21 +62,15 @@ function OnSelectionChange()
 
                 echo "<option value='$gebruikerid1'";
 
-                if (isset($_SESSION['Idselected'])){
+                /*if (isset($_SESSION['Idselected'])){
                     if($gebruikerid1 == $_SESSION['Idselected']){
-                        /*if(isset($BadgeSelected) && $badgenummer1 == $BadgeSelected){*/
                         echo "selected";
                     }
-                }
+                }*/
                 echo ">$achternaam1 $voornaam1</option>";
             }
             echo '</select><br><br></form>';
-            echo $gebruikerid1;
-            echo '<br>';
-            if (isset($_SESSION['Idselected'])){
-                echo $_SESSION['Idselected'];
-                echo '<br>';
-            }
+
         }
         else
         {
@@ -100,18 +89,12 @@ function OnSelectionChange()
 if(isset($_POST['gebruiker']) && $_POST['gebruiker'] != "") {
     $_SESSION['Idselected'] = $_POST['gebruiker'];
     $IdSelcted = $_POST['gebruiker'];
-    echo $IdSelcted;
 }
 
 //------------------------------------------------------------------------------------------------------
 ?>
 
-<script>
-    function OnSelectionChange()
-    {
-        alert("OK IT WORKS");
-    }
-</script>
+
 
 <?php
 //1: verbinding meken met de database
@@ -143,6 +126,7 @@ if ($link)
         $row  = mysqli_fetch_assoc($resultaat); //vervang fetch_row door fetch_assoc
         if($row != null)
         {
+            echo "Geselecteede persoon: ".$row["achternaam"]." ".$row["voornaam"];
 
             echo "<form method='post'>
                     <lable>Achternaam:</lable>
@@ -157,8 +141,10 @@ if ($link)
                     <input type='text' name='Rol' value='{$row['rol']}'><br>
                     <lable>Wachtwoord:</lable>
                     <input type='text' name='Wachtwoord' value='{$row['wachtwoord']}'><br><br>
+                    <input type='hidden' name='Id' value='{$row['gebruikerid']}'>
                     <input type='submit' value='pas aan' name='cmdVerstuur' >
                 </form>";
+            $SelectedId = $row['gebruikerid'];
         }
 
     }
@@ -192,11 +178,10 @@ if(isset($_POST['cmdVerstuur'])){
         if(mysqli_stmt_prepare($statement, $query))
         {
             //4c: parameter een waarde geven (= vraagteken vervangen)
-            mysqli_stmt_bind_param($statement, 'ssssssi',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $wachtwoord, $IdSelcted);
+            mysqli_stmt_bind_param($statement, 'ssssssi',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $wachtwoord, $SelectedId);
 
             $achternaam = $_POST['Achternaam'];
-            echo $achternaam;
-            echo $IdSelcted;
+            $SelectedId = $_POST['Id'];
             $voornaam = $_POST['Voornaam'];
             $badgenummer = $_POST['BadgeNummer'];
             $telefoonnr = $_POST['Telefoonnummer'];
