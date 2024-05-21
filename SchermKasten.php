@@ -15,21 +15,22 @@ Gemaakt door: Manu De Keersmaeker
 <?php
 //Het importeren van de code uit een ander php file & het aantal kasten instellen
 //----------------------------------------------------------------------------------------------------------------------
-session_start();
-include ('verbindingDB.php');
+-session_start();
 $_SESSION['AantalKasten'] = 2;
+include ('verbindingDB.php');
+
 
 //Hieronder wordt ervoor gezorgd dat de inhoud van de kast kan veranderen en dat de kast open en dicht kan.
 //----------------------------------------------------------------------------------------------------------------------
 for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
     if (isset($_POST['Kast'.$Teller])) {    
-        if ($_POST['Kast'.$Teller] == "Open" || $_POST['Kast'.$Teller] == null){
-            $_SESSION['Kast'.$Teller] = "Gesloten";
-            $_SESSION['VorigeKast'.$Teller] = "Open";
-        }
-        else{
+        if ($_POST['Kast'.$Teller] == "Gesloten" || $_POST['Kast'.$Teller] == null){
             $_SESSION['Kast'.$Teller] = "Open";
             $_SESSION['VorigeKast'.$Teller] = "Gesloten";
+        }
+        else{
+            $_SESSION['Kast'.$Teller] = "Gesloten";
+            $_SESSION['VorigeKast'.$Teller] = "Open";
         }
     }
     if (isset($_POST['StatusKast'.$Teller])){
@@ -42,12 +43,11 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
             $_SESSION['VorigeStatusKast'.$Teller] = "Vol";
         }
 
-        //Verbinding naar de database (past 'in_de_kast' aan in de tabel 'kasten'
+        //Verbinding naar de database (past 'in_de_kast' aan in de tabel 'kasten')
         $inhoud = 0;
         if ($_SESSION['StatusKast'.$Teller] == "Vol") {
             $inhoud = 1;
         }
-
         if($link){
             $query = "update kasten set in_de_kast = ? where kastid = ?";
             $stmt = mysqli_stmt_init($link);
@@ -63,7 +63,6 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
             }
             mysqli_close($link);
         }
-
     }
 }
 

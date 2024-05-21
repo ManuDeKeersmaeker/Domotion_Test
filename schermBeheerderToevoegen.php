@@ -1,10 +1,32 @@
+<!-- Jorben Wauters     Domotion        nr.:10 -->
+
+<html>
+<form method='post' >
+    Menu:<br>
+    <select name='menu' onchange="redirectToPage(this.value)">      <!-- bij verandering, de geselecteerde waarde (value) meegeven -->
+        <option value='schermBeheerderToevoegen.php' selected<?php //if ($_POST['menu'] == 'Toevoegen') echo 'selected="selected"'; ?> >Toevoegen </option>
+        <option value='schermBeheerderAanpassen.php'<?php //if ($_POST['menu'] == 'Aanpassen') echo 'selected="selected"'; ?> >Aanpassen </option>
+        <option value='schermBeheerderVerwijderen.php'<?php //if ($_POST['menu'] == 'Verwijderen') echo 'selected="selected"'; ?> >Verwijderen </option>
+    </select><br><br>
+
+    <script>
+        function redirectToPage(url) {  <!--gebruiker naar url sturen -->
+            if (url) {
+                window.location.href = url;     <!-- als er een url is dan openen, url is afkomstig van de value van de geselecteerde optsie (aanpassen, toevoe...) -->
+            }
+        }
+    </script>
+</form>
+</html>
+
+
 <?php
 echo '<form method="post">
                     <lable>Achternaam:</lable>
                     <input type="text" name="Achternaam" ><br>
                     <lable>Voornaam:</lable>
                     <input type="text" name="Voornaam" ><br>
-                    <lable>Badge nummer*:</lable>
+                    <lable>Badge nummer:</lable>
                     <input type="text" name="BadgeNummer" ><br>
                     <lable>Telefoonnummer*:</lable>
                     <input type="number" name="Telefoonnummer" ><br>
@@ -12,7 +34,7 @@ echo '<form method="post">
                     <input type="text" name="Rol" ><br>
                     <lable>Wachtwoord*:</lable>
                     <input type="text" name="Wachtwoord" ><br><br>
-                    <input type="submit" value="pas aan" name="cmdVerstuur" >
+                    <input type="submit" value="Toevoegen" name="cmdVerstuur" >
                 </form>';
 echo "* --> optioneel <br>";
 
