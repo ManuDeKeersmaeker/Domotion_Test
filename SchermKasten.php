@@ -11,7 +11,6 @@ $_SESSION['StatusKastxx'] ==> Dit geeft aan of de kast "Leeg" of "Vol" is.
 Gemaakt door: Manu De Keersmaeker
 -->
 
-
 <?php
 //Het importeren van de code uit een ander php file & het aantal kasten instellen
 //----------------------------------------------------------------------------------------------------------------------
@@ -55,6 +54,7 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
                 mysqli_stmt_bind_param($stmt, 'ii', $inhoud, $Teller);
             }
             if (mysqli_stmt_execute($stmt)){
+                $_SESSION['actie'] = $inhoud;
                 echo "Aanpassing gelukt!!";
             }
             else{

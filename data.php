@@ -22,7 +22,7 @@ echo <<<EOT
                             </div>
                         </div>
                      </form>
-                     <form method="post" action="TestOmgeving.php">
+                     <form method="post" action="BeheerKasten.php">
                          <div class="container">
                              <div class="horizontal-center">
                                  <input type="submit" value="Kasten beheren" name="knop2" class="keuze-button"/>
@@ -46,19 +46,6 @@ echo <<<EOT
 
 
 EOT;
-
-$soort = "test";
-if (isset($_POST['knop1']))
-{ $soort = "Mensen";}
-else {
-    if (isset($_POST['knop2']))
-    {
-        $soort = "Kasten";
-    } else {
-        $soort = "Logboek";
-    }
-}
-$_SESSION['soort'] = $soort;
 
 echo '<form action="index.html" method="post">';
 echo	'<input type="submit" name="home" value="home"/>';
