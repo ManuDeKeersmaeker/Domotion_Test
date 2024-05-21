@@ -55,6 +55,7 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
                 mysqli_stmt_bind_param($stmt, 'ii', $inhoud, $Teller);
             }
             if (mysqli_stmt_execute($stmt)){
+                $_SESSION['actie'] = $inhoud;
                 echo "Aanpassing gelukt!!";
             }
             else{
