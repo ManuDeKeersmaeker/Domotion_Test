@@ -23,10 +23,10 @@ function SchrijvenNaarDatabase($Teller)
             $gebruikerid = $row[0];
             $actie = 1;
 
-            if ($_SESSION['Kast'.$Teller] = "Gesloten" & $_SESSION['VorigeKast'.$Teller] = "Open") {
+            if ($_SESSION['Kast'.$Teller] == "Gesloten" && $_SESSION['VorigeKast'.$Teller] == "Open") {
                 $actie = 0;
             }
-            elseif ($_SESSION['Kast'.$Teller] = "Open" & $_SESSION['VorigeKast'.$Teller] = "Gesloten") {
+            elseif ($_SESSION['Kast'.$Teller] == "Open" && $_SESSION['VorigeKast'.$Teller] == "Gesloten") {
                 $actie = 1;
             }
 
@@ -34,9 +34,6 @@ function SchrijvenNaarDatabase($Teller)
                 $stmt->bind_param('iissi', $kastid, $gebruikerid, $date, $tijd, $actie);
                 $stmt->execute();
 
-        } else {
-            // Fout in het sql statement, komen de namen van de velden overeen met de tabel?.
-            echo mysqli_stmt_error($stmt);
         }
 
         $stmt->close();
