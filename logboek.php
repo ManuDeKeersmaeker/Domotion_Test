@@ -11,7 +11,8 @@ function SchrijvenNaarDatabase($Teller)
 
         $stmt->bind_param('s', $_SESSION['BadgeId']);
         $stmt->execute();
-        $stmt->store_result();
+        $IdGebruiker = mysqli_stmt_get_result($stmt);
+        $row = mysqli_fetch_row($IdGebruiker);
         //GebruikersID bestaat
         if ($stmt = $link->prepare('INSERT INTO logboek (idkast, idgebruiker, datum, time, actie) VALUES (?, ?, ?, ?, ?)')) {
             //Er mogen geen leesbare ww opgeslagen worden, het ww wordt gehashed opgeslagen en steeds
@@ -19,11 +20,20 @@ function SchrijvenNaarDatabase($Teller)
             $date = $_SESSION['DatumKast'.$Teller];
             $tijd = $_SESSION['TijdKast'.$Teller];
             $kastid = $Teller;
-            $gebruikerid = $_SESSION['BadgeId'];
-            $actie = 0;
+            $gebruikerid = $row[0];
+            $actie = null;
+
+            if ($_SESSION['Kast'.$Teller] == "Gesloten" & $_SESSION['VorigeKast'.$Teller] == "Open") {
+                $actie = 0;
+            }
+            elseif ($_SESSION['Kast'.$Teller] == "Open" & $_SESSION['VorigeKast'.$Teller] == "Gesloten") {
+                $actie = 1;
+            }
+
             //echo 'insert';
-            $stmt->bind_param('iissi', $kastid, $gebruikerid, $date, $tijd, $actie);
-            $stmt->execute();
+                $stmt->bind_param('iissi', $kastid, $gebruikerid, $date, $tijd, $actie);
+                $stmt->execute();
+
 
         } else {
             // Fout in het sql statement, komen de namen van de velden overeen met de tabel?.
