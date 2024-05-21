@@ -48,7 +48,6 @@ if ($link)
         if($row != null)
         {
             session_start();
-
             echo "<script>
 function OnSelectionChange()
 {
