@@ -21,12 +21,12 @@ function SchrijvenNaarDatabase($Teller)
             $tijd = $_SESSION['TijdKast'.$Teller];
             $kastid = $Teller;
             $gebruikerid = $row[0];
-            $actie = null;
+            $actie = 1;
 
-            if ($_SESSION['Kast'.$Teller] == "Gesloten" & $_SESSION['VorigeKast'.$Teller] == "Open") {
+            if ($_SESSION['Kast'.$Teller] = "Gesloten" & $_SESSION['VorigeKast'.$Teller] = "Open") {
                 $actie = 0;
             }
-            elseif ($_SESSION['Kast'.$Teller] == "Open" & $_SESSION['VorigeKast'.$Teller] == "Gesloten") {
+            elseif ($_SESSION['Kast'.$Teller] = "Open" & $_SESSION['VorigeKast'.$Teller] = "Gesloten") {
                 $actie = 1;
             }
 
