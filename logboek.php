@@ -34,7 +34,6 @@ function SchrijvenNaarDatabase($Teller)
                 $stmt->bind_param('iissi', $kastid, $gebruikerid, $date, $tijd, $actie);
                 $stmt->execute();
 
-
         } else {
             // Fout in het sql statement, komen de namen van de velden overeen met de tabel?.
             echo mysqli_stmt_error($stmt);
