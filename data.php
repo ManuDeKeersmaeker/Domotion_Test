@@ -4,7 +4,7 @@ session_start();
 include 'verbinding.php';
 
 echo <<<EOT
-
+<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" />
 <!-- Page Content -->
 <!-- Login scherm -->
 <div class="banner">
@@ -29,7 +29,7 @@ echo <<<EOT
                              </div>
                          </div>
                      </form>
-                     <form method="post" action="logboek.php">
+                     <form method="post" action="LogboekTabel.php">
                       <div class="container">
                           <div class="horizontal-center">
                               <input type="submit" value="Logboek" name="knop3" class="keuze-button"/>
