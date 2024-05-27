@@ -29,7 +29,7 @@ echo <<<EOT
                              </div>
                          </div>
                      </form>
-                     <form method="post" action="logboek.php">
+                     <form method="post" action="LogboekTabel.php">
                       <div class="container">
                           <div class="horizontal-center">
                               <input type="submit" value="Logboek" name="knop3" class="keuze-button"/>
