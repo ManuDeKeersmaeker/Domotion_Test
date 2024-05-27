@@ -1,5 +1,5 @@
 <?php
-/* include('verbinding.php');
+include('verbinding.php');
 //echo 'register';
 // kijken of er data werd doorgestuurd, isset() function kijkt of de data bestaat.
 
@@ -53,4 +53,3 @@ if ($stmt = $link->prepare('SELECT gebruikerid,  wachtwoord FROM gebruikers WHER
 $link->close();
 
 ?>
-*/
