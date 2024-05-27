@@ -31,27 +31,9 @@ if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM gebruikers WHERE
 			$_SESSION['voornaam'] = $_POST['voornaam'];
 			$_SESSION['achternaam'] = $_POST['achternaam'];
 			$_SESSION['id'] = $id;
-			//echo 'Welcome ' . $_SESSION['name'] . '!';
 
-
-			echo '<header align="center">';
-
-			echo	'<table>';
-			echo    '<tr>';
-			echo      '<td>';
-			echo        '<a href="https://www.gtibeveren.be"><img src="assets/images/logoBV.png" alt="" align="left"/></a>';
-			echo      '</td>';
-
-
-			echo    '</tr>';
-			echo  '</table>';
-			echo  '</header>';
-
-			echo '<form action="data.php" method="post">';
-			echo	 '<h1>Overzicht</h1>';
-			echo	'<h2>volgende pagina</h2>';
-			echo	'<input type="submit" name="data" value="data"/>';
-			echo'</form>';
+			echo '<form action="data.php">';
+			//echo '<input type="submit" name="data" value="data"/>';
 
 		}
 	else {

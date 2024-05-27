@@ -4,7 +4,7 @@ session_start();
 include 'verbinding.php';
 
 echo <<<EOT
-
+<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" />
 <!-- Page Content -->
 <!-- Login scherm -->
 <div class="banner">
