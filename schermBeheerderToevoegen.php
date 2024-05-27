@@ -23,24 +23,26 @@
 <?php
 echo '<form method="post">
                     <lable>Achternaam:</lable>
-                    <input type="text" name="Achternaam" ><br>
+                    <input type="text" name="achternaam" ><br>
                     <lable>Voornaam:</lable>
-                    <input type="text" name="Voornaam" ><br>
+                    <input type="text" name="voornaam" ><br>
                     <lable>Badge nummer:</lable>
-                    <input type="text" name="BadgeNummer" ><br>
+                    <input type="text" name="badgenummer" ><br>
                     <lable>Telefoonnummer*:</lable>
-                    <input type="number" name="Telefoonnummer" ><br>
+                    <input type="number" name="telefoonnr" ><br>
                     <lable>Rol:</lable>
-                    <input type="text" name="Rol" ><br>
+                    <input type="text" name="rol" ><br>
                     <lable>Wachtwoord*:</lable>
-                    <input type="text" name="Wachtwoord" ><br><br>
+                    <input type="text" name="wachtwoord" ><br><br>
                     <input type="submit" value="Toevoegen" name="cmdVerstuur" >
                 </form>';
 echo "* --> optioneel <br>";
 
 if(isset($_POST['cmdVerstuur']))
 {
-
+    include('register.php');
+}
+/*
     //1: verbinding meken met de database
     include ('verbindingDB.php');
 
@@ -88,5 +90,5 @@ if(isset($_POST['cmdVerstuur']))
         mysqli_close($link);
     }
 
-}
+}*/
 ?>

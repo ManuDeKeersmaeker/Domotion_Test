@@ -1,9 +1,9 @@
 <?php
-include('verbinding.php');
+include('verbindingDB.php');
 //echo 'register';
 // kijken of er data werd doorgestuurd, isset() function kijkt of de data bestaat.
 
-if (!isset($_POST['voornaam'], $_POST['achternaam'], $_POST['badgenummer'], $_POST['telefoonnr'], $_POST['rol'], $_POST['wachtwoord'])) {
+if (!isset($_POST['voornaam'], $_POST['achternaam'], $_POST['badgenummer'], $_POST['telefoonnr'], $_POST['rol'])) {
 	// Could not get the data that should have been sent.
 	die ('Er ging iets fout, gelieve het registratieformulier nogmaals in te vullen');
 }
@@ -36,20 +36,18 @@ if ($stmt = $link->prepare('SELECT gebruikerid,  wachtwoord FROM gebruikers WHER
 			$password = password_hash($_POST['wachtwoord'], PASSWORD_DEFAULT);
 			$stmt->bind_param('ssssss', $_POST['voornaam'], $_POST['achternaam'], $_POST['badgenummer'], $_POST['telefoonnr'], $_POST['rol'], $password);
 			$stmt->execute();
-			echo $password;
 			echo $stmt->error;
-			echo 'You have successfully registered, you can now login!';
+			echo 'Registratie is gelukt!';
 		} else {
 			// Fout in het sql statement, komen de namen van de velden overeen met de tabel?.
-			echo 'fout in query statement!_1';
+			echo 'fout in query statement!';
 			echo mysqli_stmt_error($stmt);
 		}
 	}
 	$stmt->close();
 } else {
 	// Fout in het sql statement
-	echo 'fout in query statement!_2';
+	echo 'fout in query statement!';
 }
 $link->close();
-
 ?>
