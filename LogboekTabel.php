@@ -1,4 +1,5 @@
 <html>
+<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" />
 <body>
 <form method='post'>
     <h2>Logboek</h2>

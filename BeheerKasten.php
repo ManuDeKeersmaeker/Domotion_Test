@@ -48,6 +48,7 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
 <!--Het maken van de knoppen en kasten -->
 <!--------------------------------------------------------------------------------------------------------------------->
 <html>
+<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" />
 <body>
 <form method='post'>
     <h3>Kasten beheren</h3>

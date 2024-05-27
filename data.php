@@ -1,5 +1,4 @@
 <?php
-session_start();
 // Include functions and connect to the database
 include 'verbinding.php';
 
