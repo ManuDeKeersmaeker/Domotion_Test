@@ -11,7 +11,6 @@ Gemaakt door: Manu De Keersmaeker
 -->
 
 <?php
-session_start();
 //Hier wordt gecontroleerd of de kast deur geopend of gesloten wordt.
 //----------------------------------------------------------------------------------------------------------------------
 for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++) {

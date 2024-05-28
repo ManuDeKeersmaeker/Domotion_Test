@@ -1,5 +1,17 @@
 <html>
-<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" />
+<!-- navigatie maken -->
+<!--------------------------------------------------------------------------------------------------------------------->
+<link rel="stylesheet" href="OpmaakMenubalk.css" type="text/css">
+<ul>
+    <li><a href="schermBeheerderAanpassen.php">Mensen aanpassen</a></li>
+    <li><a href="schermBeheerderToevoegen.php">Mensen toevoegen</a></li>
+    <li><a href="schermBeheerderVerwijderen.php">Mensen verwijderen</a></li>
+    <li><a href="BeheerKasten.php">Beheer kasten</a></li>
+    <li><a href="LogboekTabel.php">Logboek</a></li>
+    <li><a href="index.html">Uitloggen</a></li>
+
+</ul>
+
 <body>
 <form method='post'>
     <h2>Logboek</h2>

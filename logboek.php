@@ -5,7 +5,6 @@
 
 function SchrijvenNaarDatabase($Teller)
 {
-    session_start();
     include "verbindingDB.php";
     if ($stmt = $link->prepare('SELECT gebruikerid FROM gebruikers WHERE badgenummer = ?')) {
 
