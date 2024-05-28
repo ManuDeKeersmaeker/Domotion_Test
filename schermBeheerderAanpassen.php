@@ -4,9 +4,9 @@
 <form method='post' >
     Menu:<br>
     <select name='menu' onchange="redirectToPage(this.value)">      <!-- bij verandering, de geselecteerde waarde (value) meegeven -->
-        <option value='schermBeheerderToevoegen.php'<?php //if ($_POST['menu'] == 'Toevoegen') echo 'selected="selected"'; ?> >Toevoegen </option>
-        <option value='schermBeheerderAanpassen.php' selected<?php //if ($_POST['menu'] == 'Aanpassen') echo 'selected="selected"'; ?> >Aanpassen </option>
-        <option value='schermBeheerderVerwijderen.php'<?php //if ($_POST['menu'] == 'Verwijderen') echo 'selected="selected"'; ?> >Verwijderen </option>
+        <option value='schermBeheerderToevoegen.php'>Toevoegen </option>        <!-- De value is het bestandsnaam waar naar toe gegaan moet worden -->
+        <option value='schermBeheerderAanpassen.php' selected>Aanpassen </option>
+        <option value='schermBeheerderVerwijderen.php'>Verwijderen </option>
     </select><br><br>
 
     <script>
@@ -49,24 +49,17 @@ if ($link)
         {
             session_start();
 
-            echo '<form method="post" ><select name="gebruiker" onchange="/*OnSelectionChange()*/this.form.submit()">';
+            echo '<form method="post" ><select name="gebruiker" onchange="this.form.submit()">';    //voer actie uit als iets uit de dropdown list wordt geselecteerd
             mysqli_data_seek($resultaat, 0);    //zet $resultaat terug op het begin
-            echo "<option value='' selected>Selecteer persoon</option>";
+            echo "<option value='' selected>Selecteer persoon</option>";    //basis geselecteerde optie omdat de geselecteerde optie altijd een delay had van 1 refresh
             while ($row  = mysqli_fetch_assoc($resultaat)){
                 //5d: toon resultaat
                 $gebruikerid1 = $row["gebruikerid"];
                 $voornaam1 = $row["voornaam"];
                 $achternaam1 = $row["achternaam"];
 
-                //echo "<br> de naam van de klant is ".$achternaam1.$voornaam1." <br>";
+                echo "<option value='$gebruikerid1'";   //gebruiker toevoegen aan lijst
 
-                echo "<option value='$gebruikerid1'";
-
-                /*if (isset($_SESSION['Idselected'])){
-                    if($gebruikerid1 == $_SESSION['Idselected']){
-                        echo "selected";
-                    }
-                }*/
                 echo ">$achternaam1 $voornaam1</option>";
             }
             echo '</select><br><br></form>';
@@ -86,7 +79,7 @@ if ($link)
     //6: verbinding sluiten
     mysqli_close($link);
 }
-if(isset($_POST['gebruiker']) && $_POST['gebruiker'] != "") {
+if(isset($_POST['gebruiker']) && $_POST['gebruiker'] != "") {   //als er een waarde is en deze is niet niks
     $_SESSION['Idselected'] = $_POST['gebruiker'];
     $IdSelcted = $_POST['gebruiker'];
 }
@@ -128,7 +121,7 @@ if ($link)
         {
             echo "Geselecteede persoon: ".$row["achternaam"]." ".$row["voornaam"];
 
-            echo "<form method='post'>
+            echo "<form method='post'>            <!-- de gegevens van de geselecteede persoon in de textboxxes zetten -->
                     <lable>Achternaam:</lable>
                     <input type='text' name='Achternaam' value='{$row['achternaam']}'><br>
                     <lable>Voornaam:</lable>
@@ -138,13 +131,16 @@ if ($link)
                     <lable>Telefoonnummer:</lable>
                     <input type='number' name='Telefoonnummer' value='{$row['telefoonnr']}'><br>
                     <lable>Rol:</lable>
-                    <input type='text' name='Rol' value='{$row['rol']}'><br>
-                    <lable>Wachtwoord:</lable>
-                    <input type='text' name='Wachtwoord' value='{$row['wachtwoord']}'><br><br>
-                    <input type='hidden' name='Id' value='{$row['gebruikerid']}'>
+                    <input type='text' name='Rol' value='{$row['rol']}'><br>";
+            if ($row['rol'] == 'Beheerder'){
+                echo "<lable>Wachtwoord:</lable>
+                        <input type='text' name='Wachtwoord' value=''><br><br>";
+            }
+            echo "<input type='hidden' name='Id' value='{$row['gebruikerid']}'>
                     <input type='submit' value='pas aan' name='cmdVerstuur' >
                 </form>";
             $SelectedId = $row['gebruikerid'];
+            $_SESSION['RolAanpassen'] = $row['rol'];
         }
 
     }
@@ -158,7 +154,7 @@ if ($link)
     mysqli_close($link);
 }
 //-------------------------------------------------------------------------------
-
+//gegevens updaten/aanpassen in DB
 if(isset($_POST['cmdVerstuur'])){
     //1: verbinding meken met de database
     include ('verbindingDB.php');
@@ -168,8 +164,11 @@ if(isset($_POST['cmdVerstuur'])){
     {
         //3: opbouw van de query
         //query met een parameter
-        //$query = 'insert into update gebruikers(achternaam, voornaam, badgenummer, telefoonnr, rol, wachtwoord) values (?,?,?,?,?,?)';
-        $query = 'UPDATE gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ?, wachtwoord = ? WHERE gebruikerid = ?';
+        if ($_SESSION['RolAanpassen'] == 'Beheerder') {
+            $query = 'UPDATE gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ?, wachtwoord = ? WHERE gebruikerid = ?';
+        } else {
+            $query = 'UPDATE gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ? WHERE gebruikerid = ?';
+        }
 
         //4a: statement initialiseren op basis van de verbinding
         $statement = mysqli_stmt_init($link);
@@ -178,7 +177,12 @@ if(isset($_POST['cmdVerstuur'])){
         if(mysqli_stmt_prepare($statement, $query))
         {
             //4c: parameter een waarde geven (= vraagteken vervangen)
-            mysqli_stmt_bind_param($statement, 'ssssssi',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $wachtwoord, $SelectedId);
+            if ($_SESSION['RolAanpassen'] == 'Beheerder' && $_SESSION['RolAanpassen'] != "") {
+                mysqli_stmt_bind_param($statement, 'ssssssi',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $wachtwoord, $SelectedId);
+                $wachtwoord = password_hash($_POST['Wachtwoord'], PASSWORD_DEFAULT);
+            } else {
+                mysqli_stmt_bind_param($statement, 'sssssi',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $SelectedId);
+            }
 
             $achternaam = $_POST['Achternaam'];
             $SelectedId = $_POST['Id'];
@@ -186,8 +190,6 @@ if(isset($_POST['cmdVerstuur'])){
             $badgenummer = $_POST['BadgeNummer'];
             $telefoonnr = $_POST['Telefoonnummer'];
             $rol= $_POST['Rol'];
-            $wachtwoord = $_POST['Wachtwoord'];
-
 
             //5a: statement uitvoeren
             if (mysqli_stmt_execute($statement))
@@ -198,7 +200,6 @@ if(isset($_POST['cmdVerstuur'])){
             {
                 echo 'gebruiker is niet aangepast'.mysqli_stmt_error($statement);
             }
-
         }
         else
         {
@@ -210,19 +211,5 @@ if(isset($_POST['cmdVerstuur'])){
         mysqli_close($link);
     }
 }
-/*if (isset($_SESSION['Herlaad'])){
-    if ($_SESSION['Herlaad'] == 1){
-        $_SESSION['Herlaad'] = 0;
-        echo 0000;
-        header( 'location: '.$_SERVER['PHP_SELF']);
-    }
-    else{
-        $_SESSION['Herlaad'] = 1;
-        echo 1111;
-    }
-}
-else {
-    echo 11111111112;
-    $_SESSION['Herlaad'] = 1;
-}*/
+
 ?>

@@ -4,9 +4,9 @@
 <form method='post' >
     Menu:<br>
     <select name='menu' onchange="redirectToPage(this.value)">      <!-- bij verandering, de geselecteerde waarde (value) meegeven -->
-        <option value='schermBeheerderToevoegen.php' selected<?php //if ($_POST['menu'] == 'Toevoegen') echo 'selected="selected"'; ?> >Toevoegen </option>
-        <option value='schermBeheerderAanpassen.php'<?php //if ($_POST['menu'] == 'Aanpassen') echo 'selected="selected"'; ?> >Aanpassen </option>
-        <option value='schermBeheerderVerwijderen.php'<?php //if ($_POST['menu'] == 'Verwijderen') echo 'selected="selected"'; ?> >Verwijderen </option>
+        <option value='schermBeheerderToevoegen.php' selected>Toevoegen </option>   <!-- De value is het bestandsnaam waar naar toe gegaan moet worden -->
+        <option value='schermBeheerderAanpassen.php'>Aanpassen </option>
+        <option value='schermBeheerderVerwijderen.php'>Verwijderen </option>
     </select><br><br>
 
     <script>
