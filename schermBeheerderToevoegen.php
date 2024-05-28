@@ -17,9 +17,9 @@
 <form method='post' >
     Menu:<br>
     <select name='menu' onchange="redirectToPage(this.value)">      <!-- bij verandering, de geselecteerde waarde (value) meegeven -->
-        <option value='schermBeheerderToevoegen.php' selected<?php //if ($_POST['menu'] == 'Toevoegen') echo 'selected="selected"'; ?> >Toevoegen </option>
-        <option value='schermBeheerderAanpassen.php'<?php //if ($_POST['menu'] == 'Aanpassen') echo 'selected="selected"'; ?> >Aanpassen </option>
-        <option value='schermBeheerderVerwijderen.php'<?php //if ($_POST['menu'] == 'Verwijderen') echo 'selected="selected"'; ?> >Verwijderen </option>
+        <option value='schermBeheerderToevoegen.php' selected>Toevoegen </option>   <!-- De value is het bestandsnaam waar naar toe gegaan moet worden -->
+        <option value='schermBeheerderAanpassen.php'>Aanpassen </option>
+        <option value='schermBeheerderVerwijderen.php'>Verwijderen </option>
     </select><br><br>
 
     <script>
@@ -36,24 +36,26 @@
 <?php
 echo '<form method="post">
                     <lable>Achternaam:</lable>
-                    <input type="text" name="Achternaam" ><br>
+                    <input type="text" name="achternaam" ><br>
                     <lable>Voornaam:</lable>
-                    <input type="text" name="Voornaam" ><br>
+                    <input type="text" name="voornaam" ><br>
                     <lable>Badge nummer:</lable>
-                    <input type="text" name="BadgeNummer" ><br>
+                    <input type="text" name="badgenummer" ><br>
                     <lable>Telefoonnummer*:</lable>
-                    <input type="number" name="Telefoonnummer" ><br>
+                    <input type="number" name="telefoonnr" ><br>
                     <lable>Rol:</lable>
-                    <input type="text" name="Rol" ><br>
+                    <input type="text" name="rol" ><br>
                     <lable>Wachtwoord*:</lable>
-                    <input type="text" name="Wachtwoord" ><br><br>
+                    <input type="text" name="wachtwoord" ><br><br>
                     <input type="submit" value="Toevoegen" name="cmdVerstuur" >
                 </form>';
 echo "* --> optioneel <br>";
 
 if(isset($_POST['cmdVerstuur']))
 {
-
+    include('register.php');
+}
+/*
     //1: verbinding meken met de database
     include ('verbindingDB.php');
 
@@ -101,5 +103,5 @@ if(isset($_POST['cmdVerstuur']))
         mysqli_close($link);
     }
 
-}
+}*/
 ?>

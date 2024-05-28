@@ -16,9 +16,9 @@
 <form method='post' >
     Menu:<br>
     <select name='menu' onchange="redirectToPage(this.value)">      <!-- bij verandering, de geselecteerde waarde (value) meegeven -->
-        <option value='schermBeheerderToevoegen.php'<?php //if ($_POST['menu'] == 'Toevoegen') echo 'selected="selected"'; ?> >Toevoegen </option>
-        <option value='schermBeheerderAanpassen.php'<?php //if ($_POST['menu'] == 'Aanpassen') echo 'selected="selected"'; ?> >Aanpassen </option>
-        <option value='schermBeheerderVerwijderen.php' selected<?php //if ($_POST['menu'] == 'Verwijderen') echo 'selected="selected"'; ?> >Verwijderen </option>
+        <option value='schermBeheerderToevoegen.php'>Toevoegen </option>    <!-- De value is het bestandsnaam waar naar toe gegaan moet worden -->
+        <option value='schermBeheerderAanpassen.php'>Aanpassen </option>
+        <option value='schermBeheerderVerwijderen.php' selected>Verwijderen </option>
     </select><br><br>
 
     <script>
@@ -66,7 +66,7 @@ if ($link)
         if($row != null)
         {
             session_start();
-            echo 'Persoon: <form method="post" ><select name="gebruikerNaam" onchange="this.form.submit()">';
+            echo 'Persoon: <form method="post" ><select name="gebruikerNaam" onchange="this.form.submit()">';    //voer actie uit als iets uit de dropdown list wordt geselecteerd
             mysqli_data_seek($resultaat, 0);    //zet $resultaat terug op het begin
             while ($row  = mysqli_fetch_assoc($resultaat)){
                 //5d: toon resultaat
@@ -108,12 +108,12 @@ if ($link)
 if(isset($_POST['gebruikerNaam']) && $_POST['gebruikerNaam'] != "") {
     $_SESSION['Badgeselected'] = $_POST['gebruikerNaam'];
     $BadgeSelctedNaam = $_POST['gebruikerNaam'];
-    echo "naam.$BadgeSelctedNaam";
+    echo "naam: gebruikersid: $BadgeSelctedNaam";
 }
 if(isset($_POST['gebruikerBadge']) && $_POST['gebruikerBadge'] != "") {
     $_SESSION['Badgeselected'] = $_POST['gebruikerBadge'];
     $BadgeSelctedBadge = $_POST['gebruikerBadge'];
-    echo "badge.$BadgeSelctedBadge";
+    echo "badge: gebruikersid: $BadgeSelctedBadge";
 }
 
 //-----------------------------------------------------------------------------------
