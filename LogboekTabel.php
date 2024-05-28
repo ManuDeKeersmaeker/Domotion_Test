@@ -8,7 +8,7 @@
     <li><a href="schermBeheerderVerwijderen.php">Mensen verwijderen</a></li>
     <li><a href="BeheerKasten.php">Beheer kasten</a></li>
     <li><a href="LogboekTabel.php">Logboek</a></li>
-    <li><a href="index.html">Uitloggen</a></li>
+    <li><a href="index.php">Uitloggen</a></li>
 
 </ul>
 
@@ -20,24 +20,27 @@
         session_start();
         include "verbindingDB.php";
 
-        if ($stmt = $link->prepare('SELECT * FROM logboek')) {
+        if ($stmt = $link->prepare('SELECT * FROM logboek')) { // Selecteer alles uit het logboek om te gebruiken in de tabel.
             $stmt->execute();
             $Resultaat = mysqli_stmt_get_result($stmt);
 
+            //Voeg de header kolom toe in de tabel om de verschillende rijen te categoriseren.
             echo "
-                <tr>
-                    <th>Log</th>
-                    <th>Kast</th>
-                    <th>Naam</th>
-                    <th>Datum</th>
-                    <th>Time</th>
-                    <th>Actie</th>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Log</th>
+                        <th>Kast</th>
+                        <th>Naam</th>
+                        <th>Datum</th>
+                        <th>Time</th>
+                        <th>Actie</th>
+                    </tr>
+                </thead>
             ";
 
             while ($Row = mysqli_fetch_assoc($Resultaat)) {
-                $Badgenr = $Row['idgebruiker'];
-                if ($stmt2 = $link->prepare('SELECT voornaam, achternaam FROM gebruikers WHERE gebruikerid = ?')) {
+                $Badgenr = $Row['idgebruiker']; // Aparte variabele die als parameter dient om de voornaam en achternaam in de andere database gebruikers te vinden.
+                if ($stmt2 = $link->prepare('SELECT voornaam, achternaam FROM gebruikers WHERE gebruikerid = ?')) { // Aparte query voor het verkrijgen van de juiste volledige naam van de persoon rechststreeks uit de gebruikers database.
                     $stmt2->bind_param('s', $Badgenr);
                     $stmt2->execute();
                     $Resultaat2 = mysqli_stmt_get_result($stmt2);
@@ -45,8 +48,9 @@
 
                     $fullName = $userRow['voornaam'] . ' ' . $userRow['achternaam']; //We maken de variabele aan voor de volledige naam van de gebruiker te weergeven.
 
-                    $actie = $Row['actie'] == 1 ? 'Teruggebracht' : 'Weggenomen'; //Variabele voor het bepalen
+                    $actie = $Row['actie'] == 1 ? 'Teruggebracht' : 'Weggenomen'; //Variabele voor het bepalen van de actie, word het item in de kast weggenomen of teruggebracht?
 
+                    //Voeg de nieuwe kolommen toe met de nodige gegevens in de juiste tabelcellen.
                     echo "
                         <tr>
                             <td>{$Row['logid']}</td>
@@ -56,15 +60,16 @@
                             <td>{$Row['time']}</td>
                             <td>{$actie}</td>
                         </tr>
-            ";
+                    ";
 
-                    $stmt2->close();
+
+                    $stmt2->close(); // Sluit de 2de statement.
                 }
             }
 
-            $stmt->close();
+            $stmt->close(); // Sluit de originele statement.
         }
-        $link->close();
+        $link->close(); // Sluit de link met de database.
         ?>
 
     </table>
