@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 // connectie maken
 include 'verbinding.php';
 
@@ -17,7 +18,6 @@ if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM gebruikers WHERE
 	// Store the result so we can check if the account exists in the database.
 	$stmt->store_result();
 }
-
 	if ($stmt->num_rows > 0) {
 		$stmt->bind_result($id, $password);
 		$stmt->fetch();
@@ -32,9 +32,8 @@ if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM gebruikers WHERE
 			$_SESSION['achternaam'] = $_POST['achternaam'];
 			$_SESSION['id'] = $id;
 
-			echo '<form action="data.php">';
-			//echo '<input type="submit" name="data" value="data"/>';
-
+			header('Location: data.php');
+			exit;
 		}
 	else {
 		echo 'Foutief password!';//.$_POST['username'].'" "'.$_POST['password'];
@@ -42,5 +41,6 @@ if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM gebruikers WHERE
 } else {
 	echo 'Onbekende gebruikersnaam!';
 }
-$stmt->close();
+$link->close();
+ob_end_flush();
 ?>
