@@ -1,5 +1,7 @@
 <?php
-
+//Deze cookie zou ervoor zorgen dat je niet naar een andere pagina kan zonder dat er ingelogd is
+//Dit is nog niet af
+setcookie("ingelogd", "", time() - 3600);
 ?>
 
 <link rel="stylesheet" href="OpmaakMenubalk.css" type="text/css">
