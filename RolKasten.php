@@ -1,5 +1,14 @@
 <!-- Jorben Wauters     Domotion        nr.:10 -->
 <html>
+
+
+
+
+<!-- Nog niet afgewerkt, werkt nog niet!!!! -->
+
+
+
+
 <!-- navigatie maken -->
 <!--------------------------------------------------------------------------------------------------------------------->
 <link rel="stylesheet" href="OpmaakMenubalk.css" type="text/css">
@@ -9,7 +18,7 @@
     <li><a href="schermBeheerderVerwijderen.php">Mensen verwijderen</a></li>
     <li><a href="BeheerKasten.php">Beheer kasten</a></li>
     <li><a href="LogboekTabel.php">Logboek</a></li>
-    <li><a href="index.php">Uitloggen</a></li>
+    <li><a href="index.html">Uitloggen</a></li>
 
 </ul>
 
@@ -42,7 +51,7 @@ if ($link)
 {
     //3: opbouw van de query
     //query met een parameter
-    $query = 'select * from gebruikers';
+    $query = 'select kastid from kasten';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -61,25 +70,23 @@ if ($link)
         {
             session_start();
 
-            echo '<form method="post" ><select name="gebruiker" onchange="this.form.submit()">';    //voer actie uit als iets uit de dropdown list wordt geselecteerd
+            echo '<form method="post" ><select name="kast" onchange="this.form.submit()">';    //voer actie uit als iets uit de dropdown list wordt geselecteerd
             mysqli_data_seek($resultaat, 0);    //zet $resultaat terug op het begin
             echo "<option value='' selected>Selecteer persoon</option>";    //basis geselecteerde optie omdat de geselecteerde optie altijd een delay had van 1 refresh
             while ($row  = mysqli_fetch_assoc($resultaat)){
                 //5d: toon resultaat
-                $gebruikerid1 = $row["gebruikerid"];
-                $voornaam1 = $row["voornaam"];
-                $achternaam1 = $row["achternaam"];
+                $kastid1 = $row["kastid"];
 
-                echo "<option value='$gebruikerid1'";   //gebruiker toevoegen aan lijst
+                echo "<option value='$kastid1'";   //gebruiker toevoegen aan lijst
 
-                echo ">$achternaam1 $voornaam1</option>";
+                echo ">$kastid1</option>";
             }
             echo '</select><br><br></form>';
 
         }
         else
         {
-            echo "geen klant gevonden";
+            echo "geen kast gevonden";
         }
     }
     else
@@ -91,9 +98,9 @@ if ($link)
     //6: verbinding sluiten
     mysqli_close($link);
 }
-if(isset($_POST['gebruiker']) && $_POST['gebruiker'] != "") {   //als er een waarde is en deze is niet niks
-    $_SESSION['Idselected'] = $_POST['gebruiker'];
-    $IdSelcted = $_POST['gebruiker'];
+if(isset($_POST['kast']) && $_POST['kast'] != "") {   //als er een waarde is en deze is niet niks
+    $_SESSION['IdselectedK'] = $_POST['kast'];
+    $IdSelcted = $_POST['kast'];
 }
 
 //------------------------------------------------------------------------------------------------------
@@ -110,7 +117,7 @@ if ($link)
 {
     //3: opbouw van de query
     //query met een parameter
-    $query = 'select * from gebruikers where gebruikerid=?';
+    $query = 'select * from kasten where kastid=?';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -119,7 +126,7 @@ if ($link)
     if(mysqli_stmt_prepare($statement, $query))
     {
         //4c: parameter een waarde geven (= vraagteken vervangen)
-        mysqli_stmt_bind_param($statement, 's',  $IdSelcted);
+        mysqli_stmt_bind_param($statement, 'i',  $IdSelcted);
 
         //5a: statement uitvoeren
         mysqli_stmt_execute($statement);
@@ -134,20 +141,13 @@ if ($link)
             echo "Geselecteede persoon: ".$row["achternaam"]." ".$row["voornaam"];
 
             echo "<form method='post'>            <!-- de gegevens van de geselecteede persoon in de textboxxes zetten -->
-                    <lable>Achternaam:</lable>
-                    <input type='text' name='Achternaam' value='{$row['achternaam']}'><br>
-                    <lable>Voornaam:</lable>
-                    <input type='text' name='Voornaam' value='{$row['voornaam']}'><br>
-                    <lable>Badge nummer:</lable>
-                    <input type='text' name='BadgeNummer' value='{$row['badgenummer']}'><br>
-                    <lable>Telefoonnummer:</lable>
-                    <input type='number' name='Telefoonnummer' value='{$row['telefoonnr']}'><br>
-                    <lable>Rol:</lable>
-                    <input type='text' name='Rol' value='{$row['rol']}'><br>";
-            if ($row['rol'] == 'Beheerder'){
-                echo "<lable>Wachtwoord:</lable>
-                        <input type='text' name='Wachtwoord' value=''><br><br>";
-            }
+                    <lable>Rol 1:</lable>
+                    <input type='text' name='rol1' value='{$row['rol1']}'><br>
+                    <lable>Rol 2:</lable>
+                    <input type='text' name='rol2' value='{$row['rol2']}'><br>
+                    <lable>Rol 3:</lable>
+                    <input type='text' name='rol3' value='{$row['rol3']}'><br>";
+            //--------------++++++++-++*-+=-+=-+=-=+--==+-=+=-+=-+=-=+-==-+=-=- HIER VERDER WERKEN
             echo "<input type='hidden' name='Id' value='{$row['gebruikerid']}'>
                     <input type='submit' value='pas aan' name='cmdVerstuur' >
                 </form>";
@@ -225,3 +225,4 @@ if(isset($_POST['cmdVerstuur'])){
 }
 
 ?>
+
