@@ -14,8 +14,8 @@ function SchrijvenNaarDatabase($Teller)
         $row = mysqli_fetch_row($IdGebruiker);
         //GebruikersID bestaat
         if ($stmt = $link->prepare('INSERT INTO logboek (idkast, idgebruiker, datum, time, actie) VALUES (?, ?, ?, ?, ?)')) {
-            //Er mogen geen leesbare ww opgeslagen worden, het ww wordt gehashed opgeslagen en steeds
-            //gehashed geverifieerd.
+            //Deze statement zal de juiste waarden in de database steken.
+            //Hieronder ziet u de variabelen dat ik ga gebruiken als parameters die de waarden in de database gaan vullen.
             $date = $_SESSION['DatumKast'.$Teller];
             $tijd = $_SESSION['TijdKast'.$Teller];
             $kastid = $Teller;
