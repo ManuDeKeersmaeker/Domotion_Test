@@ -55,7 +55,7 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
     <li><a href="schermBeheerderVerwijderen.php">Mensen verwijderen</a></li>
     <li><a href="BeheerKasten.php">Beheer kasten</a></li>
     <li><a href="LogboekTabel.php">Logboek</a></li>
-    <li><a href="index.html">Uitloggen</a></li>
+    <li><a href="index.php">Uitloggen</a></li>
 
 </ul>
 

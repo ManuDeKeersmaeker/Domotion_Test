@@ -31,7 +31,7 @@ if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM gebruikers WHERE
 			$_SESSION['voornaam'] = $_POST['voornaam'];
 			$_SESSION['achternaam'] = $_POST['achternaam'];
 			$_SESSION['id'] = $id;
-
+            setcookie('ingelogd', true, time()+3600);
 			header('Location: schermBeheerderAanpassen.php');
 			exit;
 		}
