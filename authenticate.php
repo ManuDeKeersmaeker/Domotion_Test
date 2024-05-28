@@ -32,7 +32,7 @@ if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM gebruikers WHERE
 			$_SESSION['achternaam'] = $_POST['achternaam'];
 			$_SESSION['id'] = $id;
 
-			header('Location: data.php');
+			header('Location: schermBeheerderAanpassen.php');
 			exit;
 		}
 	else {
