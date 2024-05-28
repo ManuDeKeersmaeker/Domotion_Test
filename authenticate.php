@@ -1,5 +1,6 @@
 <?php
 session_start();
+ob_start();
 // connectie maken
 include 'verbinding.php';
 
@@ -17,7 +18,6 @@ if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM gebruikers WHERE
 	// Store the result so we can check if the account exists in the database.
 	$stmt->store_result();
 }
-
 	if ($stmt->num_rows > 0) {
 		$stmt->bind_result($id, $password);
 		$stmt->fetch();
@@ -31,28 +31,9 @@ if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM gebruikers WHERE
 			$_SESSION['voornaam'] = $_POST['voornaam'];
 			$_SESSION['achternaam'] = $_POST['achternaam'];
 			$_SESSION['id'] = $id;
-			//echo 'Welcome ' . $_SESSION['name'] . '!';
 
-
-			echo '<header align="center">';
-
-			echo	'<table>';
-			echo    '<tr>';
-			echo      '<td>';
-			echo        '<a href="https://www.gtibeveren.be"><img src="assets/images/logoBV.png" alt="" align="left"/></a>';
-			echo      '</td>';
-
-
-			echo    '</tr>';
-			echo  '</table>';
-			echo  '</header>';
-
-			echo '<form action="data.php" method="post">';
-			echo	 '<h1>Overzicht</h1>';
-			echo	'<h2>volgende pagina</h2>';
-			echo	'<input type="submit" name="data" value="data"/>';
-			echo'</form>';
-
+			header('Location: data.php');
+			exit;
 		}
 	else {
 		echo 'Foutief password!';//.$_POST['username'].'" "'.$_POST['password'];
@@ -60,5 +41,6 @@ if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM gebruikers WHERE
 } else {
 	echo 'Onbekende gebruikersnaam!';
 }
-$stmt->close();
+$link->close();
+ob_end_flush();
 ?>

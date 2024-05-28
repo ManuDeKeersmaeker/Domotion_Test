@@ -1,5 +1,5 @@
 <!-- Jorben Wauters     Domotion        nr.:10 -->
-
+<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" />
 <html>
 <form method='post' >
     Menu:<br>

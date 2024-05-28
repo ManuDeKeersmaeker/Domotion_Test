@@ -1,10 +1,9 @@
 <?php
-session_start();
 // Include functions and connect to the database
 include 'verbinding.php';
 
 echo <<<EOT
-
+<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" />
 <!-- Page Content -->
 <!-- Login scherm -->
 <div class="banner">

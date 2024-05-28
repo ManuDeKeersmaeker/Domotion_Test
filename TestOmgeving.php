@@ -12,6 +12,7 @@ $_SESSION['BadgeId'] = null;
 ?>
 
 <html>
+<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" />
 <head>
     <title>Geef jouw badge id in</title>
 </head>
