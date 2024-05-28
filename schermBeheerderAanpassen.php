@@ -13,23 +13,23 @@
 
 </ul>
 
-
+<!--
 <form method='post' >
     Menu:<br>
-    <select name='menu' onchange="redirectToPage(this.value)">      <!-- bij verandering, de geselecteerde waarde (value) meegeven -->
-        <option value='schermBeheerderToevoegen.php'>Toevoegen </option>        <!-- De value is het bestandsnaam waar naar toe gegaan moet worden -->
+    <select name='menu' onchange="redirectToPage(this.value)">      -- bij verandering, de geselecteerde waarde (value) meegeven --
+        <option value='schermBeheerderToevoegen.php'>Toevoegen </option>        -- De value is het bestandsnaam waar naar toe gegaan moet worden --
         <option value='schermBeheerderAanpassen.php' selected>Aanpassen </option>
         <option value='schermBeheerderVerwijderen.php'>Verwijderen </option>
     </select><br><br>
 
     <script>
-        function redirectToPage(url) {  <!--gebruiker naar url sturen -->
+        function redirectToPage(url) {  --gebruiker naar url sturen --
             if (url) {
-                window.location.href = url;     <!-- als er een url is dan openen, url is afkomstig van de value van de geselecteerde optsie (aanpassen, toevoe...) -->
+                window.location.href = url;     -- als er een url is dan openen, url is afkomstig van de value van de geselecteerde optsie (aanpassen, toevoe...) --
             }
         }
     </script>
-</form>
+</form> -->
 </html>
 
 
