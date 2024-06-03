@@ -15,7 +15,7 @@ if (empty($_POST['voornaam']) || empty($_POST['achternaam']) || empty($_POST['ba
 //echo $_POST['username'];
 //echo $_POST['password'];
 // Bestaat de gebruikersnaam al? zo nee: toevoegen in DB
-if ($stmt = $link->prepare('SELECT gebruikerid,  wachtwoord FROM lockers_gebruikers WHERE badgenummer = ?')) {
+if ($stmt = $link->prepare('SELECT gebruikerid,  wachtwoord FROM locker_gebruikers WHERE badgenummer = ?')) {
 	// Bind parameters, hash the password using the PHP password_hash function.
 	//echo 'prepare';
 	$stmt->bind_param('s', $_POST['badgenummer']);
@@ -29,7 +29,7 @@ if ($stmt = $link->prepare('SELECT gebruikerid,  wachtwoord FROM lockers_gebruik
 		//echo 'new';
 		// Nieuw account toevoegen
 		// Gebruikersnaam bestaat niet: gebruikersnaam en ww toevoegen
-		if ($stmt = $link->prepare('INSERT INTO lockers_gebruikers (voornaam, achternaam, badgenummer, telefoonnr, rol, wachtwoord) VALUES (?, ?, ?, ?, ?, ?)')) {
+		if ($stmt = $link->prepare('INSERT INTO locker_gebruikers (voornaam, achternaam, badgenummer, telefoonnr, rol, wachtwoord) VALUES (?, ?, ?, ?, ?, ?)')) {
 			//Er mogen geen leesbare ww opgeslagen worden, het ww wordt gehashed opgeslagen en steeds
 			//gehashed geverifieerd.
 			//echo 'insert';

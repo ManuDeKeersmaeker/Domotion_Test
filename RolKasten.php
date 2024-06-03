@@ -72,7 +72,7 @@ if ($link)
 
             echo '<form method="post" ><select name="kast" onchange="this.form.submit()">';    //voer actie uit als iets uit de dropdown list wordt geselecteerd
             mysqli_data_seek($resultaat, 0);    //zet $resultaat terug op het begin
-            echo "<option value='' selected>Selecteer persoon</option>";    //basis geselecteerde optie omdat de geselecteerde optie altijd een delay had van 1 refresh
+            echo "<option value='' selected>Selecteer kast</option>";    //basis geselecteerde optie omdat de geselecteerde optie altijd een delay had van 1 refresh
             while ($row  = mysqli_fetch_assoc($resultaat)){
                 //5d: toon resultaat
                 $kastid1 = $row["kastid"];
@@ -110,7 +110,7 @@ if(isset($_POST['kast']) && $_POST['kast'] != "") {   //als er een waarde is en 
 
 <?php
 //1: verbinding meken met de database
-include ('verbinding.php');
+include ('verbindingDB.php');
 
 //2: als de verbinding gelukt is
 if ($link)
@@ -138,7 +138,7 @@ if ($link)
         $row  = mysqli_fetch_assoc($resultaat); //vervang fetch_row door fetch_assoc
         if($row != null)
         {
-            echo "Geselecteede persoon: ".$row["achternaam"]." ".$row["voornaam"];
+            echo "Geselecteede kast: ".$row["kastid"];
 
             echo "<form method='post'>            <!-- de gegevens van de geselecteede persoon in de textboxxes zetten -->
                     <lable>Rol 1:</lable>
