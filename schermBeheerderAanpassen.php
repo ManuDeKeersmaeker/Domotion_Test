@@ -50,7 +50,7 @@ if ($link)
 {
     //3: opbouw van de query
     //query met een parameter
-    $query = 'select * from locker_gebruikers';
+    $query = 'select * from lockers_gebruikers';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -118,7 +118,7 @@ if ($link)
 {
     //3: opbouw van de query
     //query met een parameter
-    $query = 'select * from locker_gebruikers where gebruikerid=?';
+    $query = 'select * from lockers_gebruikers where gebruikerid=?';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -185,9 +185,9 @@ if(isset($_POST['cmdVerstuur'])){
         //3: opbouw van de query
         //query met een parameter
         if ($_SESSION['RolAanpassen'] == 'Beheerder') {
-            $query = 'UPDATE locker_gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ?, wachtwoord = ? WHERE gebruikerid = ?';
+            $query = 'UPDATE lockers_gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ?, wachtwoord = ? WHERE gebruikerid = ?';
         } else {
-            $query = 'UPDATE locker_gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ? WHERE gebruikerid = ?';
+            $query = 'UPDATE lockers_gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ? WHERE gebruikerid = ?';
         }
 
         //4a: statement initialiseren op basis van de verbinding
