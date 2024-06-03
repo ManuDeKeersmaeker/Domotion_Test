@@ -51,7 +51,7 @@ if ($link)
 {
     //3: opbouw van de query
     //query met een parameter
-    $query = 'select kastid from lockers_kasten';
+    $query = 'select kastid from locker_kasten';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -117,7 +117,7 @@ if ($link)
 {
     //3: opbouw van de query
     //query met een parameter
-    $query = 'select * from lockers_kasten where kastid=?';
+    $query = 'select * from locker_kasten where kastid=?';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -148,69 +148,63 @@ if ($link)
                     <lable>Rol 3:</lable>
                     <input type='text' name='rol3' value='{$row['rol3']}'><br>";
             //--------------++++++++-++*-+=-+=-+=-=+--==+-=+=-+=-+=-=+-==-+=-=- HIER VERDER WERKEN
-            echo "<input type='hidden' name='Id' value='{$row['kast']}'>
-                    <input type='submit' value='pas aan' name='cmdVerstuur' >
-                </form>";
-            $SelectedId = $row['gebruikerid'];
-            $_SESSION['RolAanpassen'] = $row['rol'];
+            echo "<input type='hidden' name='Id' value='{$row['kastid']}'>
+      <input type='submit' value='pas aan' name='cmdVerstuur' >
+      </form>";
+            $SelectedId = $row['kastid'];
+        }
+        else
+        {
+            echo "geen kast gevonden";
         }
 
+        mysqli_stmt_close($statement);
+
+//6: verbinding sluiten
+        mysqli_close($link);
     }
     else
     {
-        echo mysqli_stmt_error($statement);
+        echo mysqli_connect_error();
     }
-
-
-    //6: verbinding sluiten
-    mysqli_close($link);
 }
+
 //-------------------------------------------------------------------------------
 //gegevens updaten/aanpassen in DB
 if(isset($_POST['cmdVerstuur'])){
-    //1: verbinding meken met de database
+//1: verbinding meken met de database
     include ('verbindingDB.php');
 
 //2: als de verbinding gelukt is
     if ($link)
     {
-        //3: opbouw van de query
-        //query met een parameter
-        if ($_SESSION['RolAanpassen'] == 'Beheerder') {
-            $query = 'UPDATE lockers_gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ?, wachtwoord = ? WHERE gebruikerid = ?';
-        } else {
-            $query = 'UPDATE lockers_gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ? WHERE gebruikerid = ?';
-        }
+//3: opbouw van de query
+//query met een parameter
+        $query = 'UPDATE locker_kasten SET rol1 = ?, rol2 = ?, rol3 = ? WHERE kastid = ?';
 
-        //4a: statement initialiseren op basis van de verbinding
+//4a: statement initialiseren op basis van de verbinding
         $statement = mysqli_stmt_init($link);
 
-        //4b: prepared statement maken op basis van de query en het statement
+//4b: prepared statement maken op basis van de query en het statement
         if(mysqli_stmt_prepare($statement, $query))
         {
-            //4c: parameter een waarde geven (= vraagteken vervangen)
-            if ($_SESSION['RolAanpassen'] == 'Beheerder' && $_SESSION['RolAanpassen'] != "") {
-                mysqli_stmt_bind_param($statement, 'ssssssi',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $wachtwoord, $SelectedId);
-                $wachtwoord = password_hash($_POST['Wachtwoord'], PASSWORD_DEFAULT);
-            } else {
-                mysqli_stmt_bind_param($statement, 'sssssi',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $SelectedId);
-            }
+//4c: parameter een waarde geven (= vraagteken vervangen)
+            mysqli_stmt_bind_param($statement, 'sssi', $rol1, $rol2, $rol3, $SelectedId);
 
-            $achternaam = $_POST['Achternaam'];
+// Parameter waarden toekennen
+            $rol1 = $_POST['rol1'];
+            $rol2 = $_POST['rol2'];
+            $rol3 = $_POST['rol3'];
             $SelectedId = $_POST['Id'];
-            $voornaam = $_POST['Voornaam'];
-            $badgenummer = $_POST['BadgeNummer'];
-            $telefoonnr = $_POST['Telefoonnummer'];
-            $rol= $_POST['Rol'];
 
-            //5a: statement uitvoeren
+//5a: statement uitvoeren
             if (mysqli_stmt_execute($statement))
             {
-                echo 'gebruiker is aangepast';
+                echo 'Kast is aangepast';
             }
             else
             {
-                echo 'gebruiker is niet aangepast'.mysqli_stmt_error($statement);
+                echo 'Kast is niet aangepast: '.mysqli_stmt_error($statement);
             }
         }
         else
@@ -218,11 +212,15 @@ if(isset($_POST['cmdVerstuur'])){
             echo mysqli_stmt_error($statement);
         }
 
+//6: statement sluiten
+        mysqli_stmt_close($statement);
 
-        //6: verbinding sluiten
+//6: verbinding sluiten
         mysqli_close($link);
     }
+    else
+    {
+        echo mysqli_connect_error();
+    }
 }
-
 ?>
-
