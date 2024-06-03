@@ -27,8 +27,9 @@ ob_end_flush();
      Dit doe ik door een while functie te gebruiken terwijl ik steeds de eerstvolgende kolom data uit de variabele $Resultaat haal en deze in de $Row functie gebruik.
      Hierna maak ik gebruik van nog een if statement om apart de voornaam en achternaam te achterhalen uit de gebruikers database, omdat dit niet in de database van het logboek staat.
      Hierna maak ik gebruik van de sessionID 'actie' uit de schermBeheerder file om te bepalen welke actie word ondernomen en in plaats van een integer te gebruiken een string gebruiken om dit beter te verwoorden.
-     Ten laatste zet je deze variabelen met de juiste waarden en gegevens in kolommen die per rij overeenkomen met de header in elke rij. -->
-//----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------->
+     Ten laatste zet je deze variabelen met de juiste waarden en gegevens in kolommen die per rij overeenkomen met de header in elke rij.
+     -->
+
 <body>
 <form method='post'>
     <h2>Logboek</h2>
