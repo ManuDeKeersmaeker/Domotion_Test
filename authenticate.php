@@ -11,7 +11,7 @@ if ( !isset($_POST['voornaam'], $_POST['achternaam'], $_POST['badgenummer'], $_P
 }
 
 // Prepare our SQL, preparing the SQL statement will prevent SQL injection.
-if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM gebruikers WHERE badgenummer = ?')) {
+if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM lockers_gebruikers WHERE badgenummer = ?')) {
 	// Bind parameters (s = string, i = int, b = blob, etc), in our case the username is a string so we use "s"
 	$stmt->bind_param('s', $_POST['badgenummer']);
 	$stmt->execute();

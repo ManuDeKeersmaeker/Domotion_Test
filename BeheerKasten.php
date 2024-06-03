@@ -35,7 +35,7 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
         }
         //Hier schrijven we naar de db
         if ($link) {
-            $query = "update kasten set actief_defect = ? where kastid = ?";
+            $query = "update lockers_kasten set actief_defect = ? where kastid = ?";
             $stmt = mysqli_stmt_init($link);
             if (mysqli_stmt_prepare($stmt, $query)) {
                 mysqli_stmt_bind_param($stmt, 'ii', $Status, $Teller);

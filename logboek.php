@@ -6,14 +6,14 @@
 function SchrijvenNaarDatabase($Teller)
 {
     include "verbindingDB.php";
-    if ($stmt = $link->prepare('SELECT gebruikerid FROM gebruikers WHERE badgenummer = ?')) {
+    if ($stmt = $link->prepare('SELECT gebruikerid FROM lockers_gebruikers WHERE badgenummer = ?')) {
 
         $stmt->bind_param('s', $_SESSION['BadgeId']);
         $stmt->execute();
         $IdGebruiker = mysqli_stmt_get_result($stmt);
         $row = mysqli_fetch_row($IdGebruiker);
         //GebruikersID bestaat
-        if ($stmt = $link->prepare('INSERT INTO logboek (idkast, idgebruiker, datum, time, actie) VALUES (?, ?, ?, ?, ?)')) {
+        if ($stmt = $link->prepare('INSERT INTO lockers_logboek (idkast, idgebruiker, datum, time, actie) VALUES (?, ?, ?, ?, ?)')) {
             //Deze statement zal de juiste waarden in de database steken.
             //Hieronder ziet u de variabelen dat ik ga gebruiken als parameters die de waarden in de database gaan vullen.
             $date = $_SESSION['DatumKast'.$Teller];

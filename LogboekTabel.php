@@ -30,7 +30,7 @@ ob_end_flush();
         session_start();
         include "verbindingDB.php";
 
-        if ($stmt = $link->prepare('SELECT * FROM logboek')) { // Selecteer alles uit het logboek om te gebruiken in de tabel.
+        if ($stmt = $link->prepare('SELECT * FROM lockers_logboek')) { // Selecteer alles uit het logboek om te gebruiken in de tabel.
             $stmt->execute();
             $Resultaat = mysqli_stmt_get_result($stmt);
 
@@ -50,7 +50,7 @@ ob_end_flush();
 
             while ($Row = mysqli_fetch_assoc($Resultaat)) {
                 $Badgenr = $Row['idgebruiker']; // Aparte variabele die als parameter dient om de voornaam en achternaam in de andere database gebruikers te vinden.
-                if ($stmt2 = $link->prepare('SELECT voornaam, achternaam FROM gebruikers WHERE gebruikerid = ?')) { // Aparte query voor het verkrijgen van de juiste volledige naam van de persoon rechststreeks uit de gebruikers database.
+                if ($stmt2 = $link->prepare('SELECT voornaam, achternaam FROM lockers_gebruikers WHERE gebruikerid = ?')) { // Aparte query voor het verkrijgen van de juiste volledige naam van de persoon rechststreeks uit de gebruikers database.
                     $stmt2->bind_param('s', $Badgenr);
                     $stmt2->execute();
                     $Resultaat2 = mysqli_stmt_get_result($stmt2);

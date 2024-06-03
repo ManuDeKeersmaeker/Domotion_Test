@@ -56,7 +56,7 @@ if ($link)
 {
     //3: opbouw van de query
     //query met een parameter
-    $query = 'select * from gebruikers';
+    $query = 'select * from lockers_gebruikers';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -149,7 +149,7 @@ if(isset($_POST['cmdVerstuurNaam']) || isset($_POST['cmdVerstuurBadge'])) {
         if ($link) {
             //3: opbouw van de query
             //query met een parameter
-            $query = 'delete from gebruikers where gebruikerid = ?';
+            $query = 'delete from lockers_gebruikers where gebruikerid = ?';
 
             //4a: statement initialiseren op basis van de verbinding
             $statement = mysqli_stmt_init($link);
