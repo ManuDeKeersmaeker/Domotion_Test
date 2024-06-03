@@ -111,7 +111,7 @@ if(isset($_POST['gebruiker']) && $_POST['gebruiker'] != "") {   //als er een waa
 
 <?php
 //1: verbinding meken met de database
-include ('verbinding.php');
+include ('verbindingDB.php');
 
 //2: als de verbinding gelukt is
 if ($link)

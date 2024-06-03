@@ -2,7 +2,7 @@
 session_start();
 ob_start();
 // connectie maken
-include 'verbinding.php';
+include 'verbindingDB.php';
 
 // Now we check if the data from the login form was submitted, isset() will check if the data exists.
 if ( !isset($_POST['voornaam'], $_POST['achternaam'], $_POST['badgenummer'], $_POST['wachtwoord']) ) {
