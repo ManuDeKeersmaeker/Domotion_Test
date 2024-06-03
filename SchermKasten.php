@@ -55,10 +55,8 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
             }
             if (mysqli_stmt_execute($stmt)){
                 $_SESSION['actie'] = $inhoud;
-                echo "Aanpassing gelukt!!";
             }
             else{
-                echo "Aanpassing niet gelukt :(";
                 echo mysql_stmt_error($stmt);
             }
             mysqli_close($link);
