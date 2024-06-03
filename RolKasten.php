@@ -148,7 +148,7 @@ if ($link)
                     <lable>Rol 3:</lable>
                     <input type='text' name='rol3' value='{$row['rol3']}'><br>";
             //--------------++++++++-++*-+=-+=-+=-=+--==+-=+=-+=-+=-=+-==-+=-=- HIER VERDER WERKEN
-            echo "<input type='hidden' name='Id' value='{$row['gebruikerid']}'>
+            echo "<input type='hidden' name='Id' value='{$row['kast']}'>
                     <input type='submit' value='pas aan' name='cmdVerstuur' >
                 </form>";
             $SelectedId = $row['gebruikerid'];
