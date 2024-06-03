@@ -1,3 +1,13 @@
+<?php
+ob_start();
+
+if(!isset($_COOKIE['ingelogd'])) {
+    header('Location: index.php');
+    exit;
+}
+ob_end_flush();
+?>
+
 <html>
 <!-- navigatie maken -->
 <!--------------------------------------------------------------------------------------------------------------------->

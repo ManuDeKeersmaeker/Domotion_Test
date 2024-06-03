@@ -8,6 +8,13 @@ Gemaakt door: Manu De Keersmaeker
 <?php
 include ('verbindingDB.php');
 session_start();
+ob_start();
+
+if(!isset($_COOKIE['ingelogd'])) {
+    header('Location: index.php');
+    exit;
+}
+ob_end_flush();
 
 //Hier controleren we wanneer er op de knop wordt geklikt. De kleur wordt veranderd en er wordt naar de db geschreven
 //----------------------------------------------------------------------------------------------------------------------

@@ -37,6 +37,14 @@
 //1: verbinding meken met de database
 include ('verbindingDB.php');
 
+ob_start();
+
+if(!isset($_COOKIE['ingelogd'])) {
+    header('Location: index.php');
+    exit;
+}
+ob_end_flush();
+
 //2: als de verbinding gelukt is
 if ($link)
 {

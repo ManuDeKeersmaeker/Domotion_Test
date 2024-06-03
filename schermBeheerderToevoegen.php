@@ -34,6 +34,15 @@
 
 
 <?php
+
+ob_start();
+
+if(!isset($_COOKIE['ingelogd'])) {
+    header('Location: index.php');
+    exit;
+}
+ob_end_flush();
+
 echo '<form method="post">
                     <lable>Achternaam:</lable>
                     <input type="text" name="achternaam" ><br>
