@@ -53,7 +53,7 @@ echo '<form method="post">
                     <lable>Telefoonnummer:</lable>
                     <input type="number" name="telefoonnr" ><br>
                     <lable>Rol*:</lable>
-                    <select name="rol" onchange="this.form.submit()">
+                    <select name="rol"">
                     <option value="" selected>Selecteer persoon</option>
                     <option value="Beheerder">Beheerder</option>
                     <option value="Rol1">Rol 1</option>
