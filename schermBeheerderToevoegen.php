@@ -35,14 +35,14 @@
 
 
 <?php
-/*
+
 ob_start();     // Start output buffering. Dit zorgt ervoor dat er geen output naar de browser wordt gestuurd totdat ob_end_flush() wordt aangeroepen.
 
 if(!isset($_COOKIE['ingelogd'])) {
     header('Location: index.php');
     exit;       // Zorg ervoor dat de scriptuitvoering hier stopt, zodat de rest van de code niet wordt uitgevoerd.
 }
-ob_end_flush();     // Stuur de output buffer naar de browser en stop met bufferen.*/
+ob_end_flush();     // Stuur de output buffer naar de browser en stop met bufferen.
 
 echo '<form method="post" id="formInvullen">
                     <lable>Achternaam*:</lable>
