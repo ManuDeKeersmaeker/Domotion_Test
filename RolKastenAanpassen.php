@@ -20,7 +20,7 @@ include ('verbindingDB.php');
 //2: als de verbinding gelukt is
 if ($link) {
     //3: opbouw van de query
-    $query = 'select kastid from kasten';
+    $query = 'select kastid from lockers_kasten';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -66,7 +66,7 @@ include ('verbindingDB.php');
 //2: als de verbinding gelukt is
 if ($link) {
     //3: opbouw van de query
-    $query = 'select * from kasten where kastid=?';
+    $query = 'select * from lockers_kasten where kastid=?';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -117,7 +117,7 @@ if (isset($_POST['cmdVerstuur'])) {
     //2: als de verbinding gelukt is
     if ($link) {
         //3: opbouw van de query
-        $query = 'UPDATE kasten SET rol1 = ?, rol2 = ?, rol3 = ? WHERE kastid = ?';
+        $query = 'UPDATE lockers_kasten SET rol1 = ?, rol2 = ?, rol3 = ? WHERE kastid = ?';
 
         //4a: statement initialiseren op basis van de verbinding
         $statement = mysqli_stmt_init($link);
