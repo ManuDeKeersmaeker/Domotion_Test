@@ -9,11 +9,21 @@
     <li><a href="schermBeheerderToevoegen.php">Mensen toevoegen</a></li>
     <li><a href="schermBeheerderVerwijderen.php">Mensen verwijderen</a></li>
     <li><a href="BeheerKasten.php">Beheer kasten</a></li>
+    <li><a href="RolKastenAanpassen.php">Rol kasten aanpassen</li>
     <li><a href="LogboekTabel.php">Logboek</a></li>
     <li><a href="index.html">Uitloggen</a></li>
 </ul>
 
 <?php
+
+ob_start();
+
+if (!isset($_COOKIE['ingelogd'])) {
+    header('Location: index.php');
+    exit;
+}
+ob_end_flush();
+
 //1: verbinding meken met de database
 include ('verbindingDB.php');
 
