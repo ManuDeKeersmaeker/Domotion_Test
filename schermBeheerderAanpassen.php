@@ -8,7 +8,7 @@
     <li><a href="schermBeheerderToevoegen.php">Mensen toevoegen</a></li>
     <li><a href="schermBeheerderVerwijderen.php">Mensen verwijderen</a></li>
     <li><a href="BeheerKasten.php">Beheer kasten</a></li>
-    <li><a href="RolKastenAanpassen.php">Rol kasten aanpassen</li>
+    <li><a href="RolKastenAanpassen.php">Rol kasten aanpassen</a></li>
     <li><a href="LogboekTabel.php">Logboek</a></li>
     <li><a href="index.php">Uitloggen</a></li>
 
