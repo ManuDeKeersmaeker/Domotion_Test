@@ -37,12 +37,18 @@
 //1: verbinding meken met de database
 include ('verbindingDB.php');
 
+// Start output buffering. Dit zorgt ervoor dat er geen output naar de browser wordt gestuurd totdat ob_end_flush() wordt aangeroepen.
 ob_start();
 
-if(!isset($_COOKIE['ingelogd'])) {
+// Controleer of de cookie 'ingelogd' is gezet. Dit controleert of de gebruiker ingelogd is.
+if (!isset($_COOKIE['ingelogd'])) {
+    // Als de cookie niet is gezet, stuur de gebruiker naar 'index.php'.
     header('Location: index.php');
+    // Zorg ervoor dat de scriptuitvoering hier stopt, zodat de rest van de code niet wordt uitgevoerd.
     exit;
 }
+
+// Stuur de output buffer naar de browser en stop met bufferen.
 ob_end_flush();
 
 //2: als de verbinding gelukt is
@@ -152,11 +158,11 @@ if ($link)
                     <input type='number' name='Telefoonnummer' value='{$row['telefoonnr']}'><br>
                     <lable>Rol:</lable>
                     <input type='text' name='Rol' value='{$row['rol']}'><br>";
-            if ($row['rol'] == 'Beheerder'){
+            if ($row['rol'] == 'Beheerder'){        //als de rol == aan Beheerder dan wachtwoord mogelijk
                 echo "<lable>Wachtwoord:</lable>
                         <input type='text' name='Wachtwoord' value=''><br><br>";
             }
-            echo "<input type='hidden' name='Id' value='{$row['gebruikerid']}'>
+            echo "<input type='hidden' name='Id' value='{$row['gebruikerid']}'>       //waarde meegeven zonder te tonen
                     <input type='submit' value='pas aan' name='cmdVerstuur' >
                 </form>";
             $SelectedId = $row['gebruikerid'];
@@ -185,9 +191,9 @@ if(isset($_POST['cmdVerstuur'])){
         //3: opbouw van de query
         //query met een parameter
         if ($_SESSION['RolAanpassen'] == 'Beheerder') {
-            $query = 'UPDATE lockers_gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ?, wachtwoord = ? WHERE gebruikerid = ?';
+            $query = 'UPDATE lockers_gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ?, wachtwoord = ? WHERE gebruikerid = ?';      //met ww
         } else {
-            $query = 'UPDATE lockers_gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ? WHERE gebruikerid = ?';
+            $query = 'UPDATE lockers_gebruikers SET achternaam = ?, voornaam = ?, badgenummer = ?, telefoonnr = ?, rol = ? WHERE gebruikerid = ?';      //zonder ww
         }
 
         //4a: statement initialiseren op basis van de verbinding
@@ -198,10 +204,10 @@ if(isset($_POST['cmdVerstuur'])){
         {
             //4c: parameter een waarde geven (= vraagteken vervangen)
             if ($_SESSION['RolAanpassen'] == 'Beheerder' && $_SESSION['RolAanpassen'] != "") {
-                mysqli_stmt_bind_param($statement, 'ssssssi',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $wachtwoord, $SelectedId);
+                mysqli_stmt_bind_param($statement, 'ssssssi',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $wachtwoord, $SelectedId);      //met ww
                 $wachtwoord = password_hash($_POST['Wachtwoord'], PASSWORD_DEFAULT);
             } else {
-                mysqli_stmt_bind_param($statement, 'sssssi',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $SelectedId);
+                mysqli_stmt_bind_param($statement, 'sssssi',  $achternaam, $voornaam, $badgenummer, $telefoonnr, $rol, $SelectedId);        //zonder ww
             }
 
             $achternaam = $_POST['Achternaam'];

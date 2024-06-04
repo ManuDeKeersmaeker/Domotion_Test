@@ -115,6 +115,5 @@ setcookie("ingelogd", "", time() - 3600);
 <!-- Sub Footer Ends Here -->
 </body>
 </html>
-
 </body>
 </html>

@@ -170,7 +170,6 @@ if(isset($_POST['cmdVerstuurNaam']) || isset($_POST['cmdVerstuurBadge'])) {
                 echo mysqli_stmt_error($statement);
             }
 
-
             //6: verbinding sluiten
             mysqli_close($link);
     }

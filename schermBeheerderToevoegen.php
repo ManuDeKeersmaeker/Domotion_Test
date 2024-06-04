@@ -1,7 +1,7 @@
 <!-- Jorben Wauters     Domotion        nr.:10 -->
 
 <html>
-<!-- navigatie maken -->
+<!-- navigatie maken (menu balk)-->
 <!--------------------------------------------------------------------------------------------------------------------->
 <link rel="stylesheet" href="OpmaakMenubalk.css" type="text/css">
 <ul>
@@ -35,13 +35,13 @@
 
 <?php
 
-ob_start();
+ob_start();     // Start output buffering. Dit zorgt ervoor dat er geen output naar de browser wordt gestuurd totdat ob_end_flush() wordt aangeroepen.
 
 if(!isset($_COOKIE['ingelogd'])) {
     header('Location: index.php');
-    exit;
+    exit;       // Zorg ervoor dat de scriptuitvoering hier stopt, zodat de rest van de code niet wordt uitgevoerd.
 }
-ob_end_flush();
+ob_end_flush();     // Stuur de output buffer naar de browser en stop met bufferen.
 
 echo '<form method="post">
                     <lable>Achternaam:</lable>

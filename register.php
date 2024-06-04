@@ -33,7 +33,7 @@ if ($stmt = $link->prepare('SELECT gebruikerid,  wachtwoord FROM lockers_gebruik
 			//Er mogen geen leesbare ww opgeslagen worden, het ww wordt gehashed opgeslagen en steeds
 			//gehashed geverifieerd.
 			//echo 'insert';
-			$password = password_hash($_POST['wachtwoord'], PASSWORD_DEFAULT);
+			$password = password_hash($_POST['wachtwoord'], PASSWORD_DEFAULT);      //incryptie van het wachtwoord
 			$stmt->bind_param('ssssss', $_POST['voornaam'], $_POST['achternaam'], $_POST['badgenummer'], $_POST['telefoonnr'], $_POST['rol'], $password);
 			$stmt->execute();
 			echo $stmt->error;

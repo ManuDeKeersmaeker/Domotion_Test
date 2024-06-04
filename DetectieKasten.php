@@ -35,7 +35,7 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
     }
     if ($_SESSION['Kast'.$Teller.'_Sluiten'] == true){
         include ('logboek.php');
-        SchrijvenNaarDatabase($Teller);
+        SchrijvenNaarDatabase($Teller); //Teller = kastnummer
         $_SESSION['Kast'.$Teller.'_Sluiten'] = false;
     }
 }

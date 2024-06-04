@@ -8,11 +8,11 @@ Gemaakt door: Manu De Keersmaeker
 
 <?php
 session_start();
-$_SESSION['BadgeId'] = null;
+$_SESSION['BadgeId'] = null;    //variable aanmaken
 ?>
 
 <html>
-<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" />
+<link rel="stylesheet" href="https://unpkg.com/sakura.css/css/sakura.css" />        //css toevoegen
 <head>
     <title>Geef jouw badge id in</title>
 </head>

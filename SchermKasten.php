@@ -14,15 +14,15 @@ Gemaakt door: Manu De Keersmaeker
 <?php
 //Het importeren van de code uit een ander php file & het aantal kasten instellen
 //----------------------------------------------------------------------------------------------------------------------
--session_start();
+session_start();
 $_SESSION['AantalKasten'] = 2;
 include ('verbindingDB.php');
 
 
 //Hieronder wordt ervoor gezorgd dat de inhoud van de kast kan veranderen en dat de kast open en dicht kan.
 //----------------------------------------------------------------------------------------------------------------------
-for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
-    if (isset($_POST['Kast'.$Teller])) {    
+for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){     //teller wordt ook gebruikt als kast nummer
+    if (isset($_POST['Kast'.$Teller])) {            //kijken of er op de knop is gedrukt om de status te veranderen
         if ($_POST['Kast'.$Teller] == "Gesloten" || $_POST['Kast'.$Teller] == null){
             $_SESSION['Kast'.$Teller] = "Open";
             $_SESSION['VorigeKast'.$Teller] = "Gesloten";
@@ -33,7 +33,7 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
         }
     }
     if (isset($_POST['StatusKast'.$Teller])){
-        if ($_POST['StatusKast'.$Teller] == "Leeg" || $_POST['StatusKast'.$Teller] == null){
+        if ($_POST['StatusKast'.$Teller] == "Leeg" || $_POST['StatusKast'.$Teller] == null){        //kijken of kast leeg of vol is
             $_SESSION['StatusKast'.$Teller] = "Vol";
             $_SESSION['VorigeStatusKast'.$Teller] = "Leeg";
         }
@@ -43,7 +43,7 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
         }
 
         //Verbinding naar de database (past 'in_de_kast' aan in de tabel 'kasten')
-        $inhoud = 0;
+        $inhoud = 0;        //in DB --> leeg=0, vol=1
         if ($_SESSION['StatusKast'.$Teller] == "Vol") {
             $inhoud = 1;
         }

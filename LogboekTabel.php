@@ -67,6 +67,8 @@ ob_end_flush();
                     $fullName = $userRow['voornaam'] . ' ' . $userRow['achternaam']; //We maken de variabele aan voor de volledige naam van de gebruiker te weergeven.
 
                     $actie = $Row['actie'] == 1 ? 'Teruggebracht' : 'Weggenomen'; //Variabele voor het bepalen van de actie, word het item in de kast weggenomen of teruggebracht?
+                    //als gelijk aan 1 dan 'teruggebracht' anders weggenomen
+
 
                     //Voeg de nieuwe kolommen toe met de nodige gegevens in de juiste tabelcellen.
                     echo "

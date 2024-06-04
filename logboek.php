@@ -37,6 +37,5 @@ function SchrijvenNaarDatabase($Teller)
         $stmt->close();
     }
     $link->close();
-
 }
 ?>

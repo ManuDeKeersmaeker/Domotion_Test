@@ -8,13 +8,21 @@ Gemaakt door: Manu De Keersmaeker
 <?php
 include ('verbindingDB.php');
 session_start();
+
+// Start output buffering. Dit zorgt ervoor dat er geen output naar de browser wordt gestuurd totdat ob_end_flush() wordt aangeroepen.
 ob_start();
 
-if(!isset($_COOKIE['ingelogd'])) {
+// Controleer of de cookie 'ingelogd' is gezet. Dit controleert of de gebruiker ingelogd is.
+if (!isset($_COOKIE['ingelogd'])) {
+    // Als de cookie niet is gezet, stuur de gebruiker naar 'index.php'.
     header('Location: index.php');
+    // Zorg ervoor dat de scriptuitvoering hier stopt, zodat de rest van de code niet wordt uitgevoerd.
     exit;
 }
+
+// Stuur de output buffer naar de browser en stop met bufferen.
 ob_end_flush();
+
 
 //Hier controleren we wanneer er op de knop wordt geklikt. De kleur wordt veranderd en er wordt naar de db geschreven
 //----------------------------------------------------------------------------------------------------------------------

@@ -1,6 +1,6 @@
 <?php
 session_start();
-ob_start();
+ob_start();     // Start output buffering. Dit zorgt ervoor dat er geen output naar de browser wordt gestuurd totdat ob_end_flush() wordt aangeroepen.
 // connectie maken
 include 'verbindingDB.php';
 
@@ -36,7 +36,7 @@ if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM lockers_gebruike
             //Dit is nog niet af
             setcookie('ingelogd', true, time()+3600);
 			header('Location: schermBeheerderAanpassen.php');
-			exit;
+			exit;       // Zorg ervoor dat de scriptuitvoering hier stopt, zodat de rest van de code niet wordt uitgevoerd.
 		}
 	else {
 		echo 'Foutief password!';//.$_POST['username'].'" "'.$_POST['password'];
@@ -45,5 +45,5 @@ if ($stmt = $link->prepare('SELECT gebruikerid, wachtwoord FROM lockers_gebruike
 	echo 'Onbekende gebruikersnaam!';
 }
 $link->close();
-ob_end_flush();
+ob_end_flush();     // Stuur de output buffer naar de browser en stop met bufferen.
 ?>
