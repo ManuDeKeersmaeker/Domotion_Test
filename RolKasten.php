@@ -51,7 +51,7 @@ if ($link)
 {
     //3: opbouw van de query
     //query met een parameter
-    $query = 'select kastid from locker_kasten';
+    $query = 'select kastid from lockers_kasten';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -117,7 +117,7 @@ if ($link)
 {
     //3: opbouw van de query
     //query met een parameter
-    $query = 'select * from locker_kasten where kastid=?';
+    $query = 'select * from lockers_kasten where kastid=?';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -180,7 +180,7 @@ if(isset($_POST['cmdVerstuur'])){
     {
 //3: opbouw van de query
 //query met een parameter
-        $query = 'UPDATE locker_kasten SET rol1 = ?, rol2 = ?, rol3 = ? WHERE kastid = ?';
+        $query = 'UPDATE lockers_kasten SET rol1 = ?, rol2 = ?, rol3 = ? WHERE kastid = ?';
 
 //4a: statement initialiseren op basis van de verbinding
         $statement = mysqli_stmt_init($link);
