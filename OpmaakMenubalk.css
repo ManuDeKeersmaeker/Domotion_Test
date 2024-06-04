@@ -1,4 +1,11 @@
- ul {
+/* Stijl voor disabled knop */
+#submitButton:disabled {
+    background-color: #ccc; /* Grijs als voorbeeld */
+    border-color: #ccc; /* Grijs als voorbeeld */
+    cursor: not-allowed; /* Muiscursor als niet toegestaan */
+}
+
+ul {
      list-style-type: none;
      margin: 0;
      padding: 0;

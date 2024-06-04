@@ -34,27 +34,27 @@
 
 
 <?php
-
+/*
 ob_start();     // Start output buffering. Dit zorgt ervoor dat er geen output naar de browser wordt gestuurd totdat ob_end_flush() wordt aangeroepen.
 
 if(!isset($_COOKIE['ingelogd'])) {
     header('Location: index.php');
     exit;       // Zorg ervoor dat de scriptuitvoering hier stopt, zodat de rest van de code niet wordt uitgevoerd.
 }
-ob_end_flush();     // Stuur de output buffer naar de browser en stop met bufferen.
+ob_end_flush();     // Stuur de output buffer naar de browser en stop met bufferen.*/
 
-echo '<form method="post">
+echo '<form method="post" id="formInvullen">
                     <lable>Achternaam*:</lable>
-                    <input type="text" name="achternaam" ><br>
+                    <input type="text" name="achternaam" required><br>
                     <lable>Voornaam*:</lable>
-                    <input type="text" name="voornaam" ><br>
+                    <input type="text" name="voornaam" required><br>
                     <lable>Badge nummer*:</lable>
-                    <input type="text" name="badgenummer" ><br>
+                    <input type="text" name="badgenummer" required><br>
                     <lable>Telefoonnummer:</lable>
                     <input type="number" name="telefoonnr" ><br>
                     <lable>Rol*:</lable>
-                    <select name="rol"">
-                    <option value="" selected>Selecteer persoon</option>
+                    <select name="rol" required>
+                    <option value="" selected>Selecteer Rol</option>
                     <option value="Beheerder">Beheerder</option>
                     <option value="Rol1">Rol 1</option>
                     <option value="Rol2">Rol 2</option>
@@ -62,9 +62,34 @@ echo '<form method="post">
                     </select><br>
                     <lable>Wachtwoord:</lable>
                     <input type="text" name="wachtwoord" ><br><br>
-                    <input type="submit" value="Toevoegen" name="cmdVerstuur" >
+                    <input type="submit" value="Toevoegen" name="cmdVerstuur" id="submitButton" disabled>
                 </form>';
 echo "* --> Verplicht in te vullen <br>";
+?>
+<html>
+<script>    /*code om de knop pas te ontgrendelen als de info is ingevuld*/
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById('formInvullen');
+        const inputs = form.querySelectorAll('input:not([name="Telo"]), input[type="number"], select');
+        const submitButton = document.getElementById('submitButton');
+
+        function checkInputs() {
+            let allFilled = true;
+            inputs.forEach(input => {
+                if (!input.value && input.hasAttribute('required')) {
+                    allFilled = false;
+                }
+            });
+            submitButton.disabled = !allFilled;
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', checkInputs);
+        });
+    });
+</script>
+</html>
+<?php
 
 if(isset($_POST['cmdVerstuur']))
 {
