@@ -100,7 +100,7 @@ if ($link)
                 echo ">$badgenummer2</option>";
             }
 
-                echo '</select><br><br></form>';
+                echo '</select><br></form>';
         }
         else
         {
