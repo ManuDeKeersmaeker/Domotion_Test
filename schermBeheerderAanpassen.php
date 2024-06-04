@@ -162,7 +162,8 @@ if ($link)
                 echo "<lable>Wachtwoord:</lable>
                         <input type='text' name='Wachtwoord' value=''><br><br>";
             }
-            echo "<input type='hidden' name='Id' value='{$row['gebruikerid']}'>       //waarde meegeven zonder te tonen
+            //waarde meegeven zonder te tonen
+            echo "<input type='hidden' name='Id' value='{$row['gebruikerid']}'>       
                     <input type='submit' value='pas aan' name='cmdVerstuur' >
                 </form>";
             $SelectedId = $row['gebruikerid'];
