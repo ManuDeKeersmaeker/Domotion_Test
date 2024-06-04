@@ -44,21 +44,27 @@ if(!isset($_COOKIE['ingelogd'])) {
 ob_end_flush();     // Stuur de output buffer naar de browser en stop met bufferen.
 
 echo '<form method="post">
-                    <lable>Achternaam:</lable>
+                    <lable>Achternaam*:</lable>
                     <input type="text" name="achternaam" ><br>
-                    <lable>Voornaam:</lable>
+                    <lable>Voornaam*:</lable>
                     <input type="text" name="voornaam" ><br>
-                    <lable>Badge nummer:</lable>
+                    <lable>Badge nummer*:</lable>
                     <input type="text" name="badgenummer" ><br>
-                    <lable>Telefoonnummer*:</lable>
+                    <lable>Telefoonnummer:</lable>
                     <input type="number" name="telefoonnr" ><br>
-                    <lable>Rol:</lable>
-                    <input type="text" name="rol" ><br>
-                    <lable>Wachtwoord*:</lable>
+                    <lable>Rol*:</lable>
+                    <select name="rol" onchange="this.form.submit()">
+                    <option value="" selected>Selecteer persoon</option>
+                    <option value="Beheerder">Beheerder</option>
+                    <option value="Rol1">Rol 1</option>
+                    <option value="Rol2">Rol 2</option>
+                    <option value="Rol3">Rol 3</option>
+                    </select><br>
+                    <lable>Wachtwoord:</lable>
                     <input type="text" name="wachtwoord" ><br><br>
                     <input type="submit" value="Toevoegen" name="cmdVerstuur" >
                 </form>';
-echo "* --> optioneel <br>";
+echo "* --> Verplicht in te vullen <br>";
 
 if(isset($_POST['cmdVerstuur']))
 {
