@@ -49,9 +49,9 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
                 mysqli_stmt_bind_param($stmt, 'ii', $Status, $Teller);
             }
             if (mysqli_stmt_execute($stmt)) {
-                echo "Aanpassing gelukt!!";
+                //echo "Aanpassing gelukt!!";
             } else {
-                echo "Aanpassing niet gelukt :(";
+                //echo "Aanpassing niet gelukt :(";
                 echo mysql_stmt_error($stmt);
             }
             mysqli_close($link);
@@ -69,6 +69,7 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){
     <li><a href="schermBeheerderToevoegen.php">Mensen toevoegen</a></li>
     <li><a href="schermBeheerderVerwijderen.php">Mensen verwijderen</a></li>
     <li><a href="BeheerKasten.php">Beheer kasten</a></li>
+    <li><a href="RolKastenAanpassen.php">Rol kasten aanpassen</a></li>
     <li><a href="LogboekTabel.php">Logboek</a></li>
     <li><a href="index.php">Uitloggen</a></li>
 

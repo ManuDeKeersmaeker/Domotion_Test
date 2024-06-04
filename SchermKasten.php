@@ -15,7 +15,7 @@ Gemaakt door: Manu De Keersmaeker
 //Het importeren van de code uit een ander php file & het aantal kasten instellen
 //----------------------------------------------------------------------------------------------------------------------
 session_start();
-$_SESSION['AantalKasten'] = 2;
+$_SESSION['AantalKasten'] = 8;
 include ('verbindingDB.php');
 
 

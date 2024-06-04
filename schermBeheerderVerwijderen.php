@@ -8,6 +8,7 @@
     <li><a href="schermBeheerderToevoegen.php">Mensen toevoegen</a></li>
     <li><a href="schermBeheerderVerwijderen.php">Mensen verwijderen</a></li>
     <li><a href="BeheerKasten.php">Beheer kasten</a></li>
+    <li><a href="RolKastenAanpassen.php">Rol kasten aanpassen</a></li>
     <li><a href="LogboekTabel.php">Logboek</a></li>
     <li><a href="index.php">Uitloggen</a></li>
 
@@ -86,6 +87,9 @@ if ($link)
                 echo ">$voornaam1 $achternaam1</option>";
             }
             echo '</select></form>';
+            echo '<form method="post">
+    <input type="submit" value="Verwijder persoon" name="cmdVerstuurNaam" >
+</form>';
             mysqli_data_seek($resultaat, 0);    //zet $resultaat terug op het begin
             echo 'Badgenummer: <form method="post" ><select name="gebruikerBadge" onchange="this.form.submit()">';
             while ($row2  = mysqli_fetch_assoc($resultaat)){
@@ -97,7 +101,7 @@ if ($link)
                 echo ">$badgenummer2</option>";
             }
 
-                echo '</select><br><br></form>';
+                echo '</select></form>';
         }
         else
         {
@@ -131,7 +135,6 @@ if(isset($_POST['gebruikerBadge']) && $_POST['gebruikerBadge'] != "") {
 <html>
 <body>
 <form method="post">
-    <input type="submit" value="Verwijder persoon" name="cmdVerstuurNaam" >
     <input type="submit" value="Verwijder badge" name="cmdVerstuurBadge" >
 </form>
 </body>

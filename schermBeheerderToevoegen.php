@@ -9,6 +9,7 @@
     <li><a href="schermBeheerderToevoegen.php">Mensen toevoegen</a></li>
     <li><a href="schermBeheerderVerwijderen.php">Mensen verwijderen</a></li>
     <li><a href="BeheerKasten.php">Beheer kasten</a></li>
+    <li><a href="RolKastenAanpassen.php">Rol kasten aanpassen</a></li>
     <li><a href="LogboekTabel.php">Logboek</a></li>
     <li><a href="index.php">Uitloggen</a></li>
 
@@ -43,22 +44,53 @@ if(!isset($_COOKIE['ingelogd'])) {
 }
 ob_end_flush();     // Stuur de output buffer naar de browser en stop met bufferen.
 
-echo '<form method="post">
-                    <lable>Achternaam:</lable>
-                    <input type="text" name="achternaam" ><br>
-                    <lable>Voornaam:</lable>
-                    <input type="text" name="voornaam" ><br>
-                    <lable>Badge nummer:</lable>
-                    <input type="text" name="badgenummer" ><br>
-                    <lable>Telefoonnummer*:</lable>
+echo '<form method="post" id="formInvullen">
+                    <lable>Achternaam*:</lable>
+                    <input type="text" name="achternaam" required><br>
+                    <lable>Voornaam*:</lable>
+                    <input type="text" name="voornaam" required><br>
+                    <lable>Badge nummer*:</lable>
+                    <input type="text" name="badgenummer" required><br>
+                    <lable>Telefoonnummer:</lable>
                     <input type="number" name="telefoonnr" ><br>
-                    <lable>Rol:</lable>
-                    <input type="text" name="rol" ><br>
-                    <lable>Wachtwoord*:</lable>
+                    <lable>Rol*:</lable>
+                    <select name="rol" required>
+                    <option value="" selected>Selecteer Rol</option>
+                    <option value="Beheerder">Beheerder</option>
+                    <option value="Rol1">Rol 1</option>
+                    <option value="Rol2">Rol 2</option>
+                    <option value="Rol3">Rol 3</option>
+                    </select><br>
+                    <lable>Wachtwoord:</lable>
                     <input type="text" name="wachtwoord" ><br><br>
-                    <input type="submit" value="Toevoegen" name="cmdVerstuur" >
+                    <input type="submit" value="Toevoegen" name="cmdVerstuur" id="submitButton" disabled>
                 </form>';
-echo "* --> optioneel <br>";
+echo "* --> Verplicht in te vullen <br>";
+?>
+<html>
+<script>    /*code om de knop pas te ontgrendelen als de info is ingevuld*/
+    document.addEventListener("DOMContentLoaded", function() {
+        const form = document.getElementById('formInvullen');
+        const inputs = form.querySelectorAll('input:not([name="Telo"]), input[type="number"], select');
+        const submitButton = document.getElementById('submitButton');
+
+        function checkInputs() {
+            let allFilled = true;
+            inputs.forEach(input => {
+                if (!input.value && input.hasAttribute('required')) {
+                    allFilled = false;
+                }
+            });
+            submitButton.disabled = !allFilled;
+        }
+
+        inputs.forEach(input => {
+            input.addEventListener('input', checkInputs);
+        });
+    });
+</script>
+</html>
+<?php
 
 if(isset($_POST['cmdVerstuur']))
 {

@@ -9,18 +9,28 @@
     <li><a href="schermBeheerderToevoegen.php">Mensen toevoegen</a></li>
     <li><a href="schermBeheerderVerwijderen.php">Mensen verwijderen</a></li>
     <li><a href="BeheerKasten.php">Beheer kasten</a></li>
+    <li><a href="RolKastenAanpassen.php">Rol kasten aanpassen</a></li>
     <li><a href="LogboekTabel.php">Logboek</a></li>
     <li><a href="index.html">Uitloggen</a></li>
 </ul>
 
 <?php
+
+ob_start();
+
+if (!isset($_COOKIE['ingelogd'])) {
+    header('Location: index.php');
+    exit;
+}
+ob_end_flush();
+
 //1: verbinding meken met de database
 include ('verbindingDB.php');
 
 //2: als de verbinding gelukt is
 if ($link) {
     //3: opbouw van de query
-    $query = 'select kastid from kasten';
+    $query = 'select kastid from lockers_kasten';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -66,7 +76,7 @@ include ('verbindingDB.php');
 //2: als de verbinding gelukt is
 if ($link) {
     //3: opbouw van de query
-    $query = 'select * from kasten where kastid=?';
+    $query = 'select * from lockers_kasten where kastid=?';
 
     //4a: statement initialiseren op basis van de verbinding
     $statement = mysqli_stmt_init($link);
@@ -117,7 +127,7 @@ if (isset($_POST['cmdVerstuur'])) {
     //2: als de verbinding gelukt is
     if ($link) {
         //3: opbouw van de query
-        $query = 'UPDATE kasten SET rol1 = ?, rol2 = ?, rol3 = ? WHERE kastid = ?';
+        $query = 'UPDATE lockers_kasten SET rol1 = ?, rol2 = ?, rol3 = ? WHERE kastid = ?';
 
         //4a: statement initialiseren op basis van de verbinding
         $statement = mysqli_stmt_init($link);
