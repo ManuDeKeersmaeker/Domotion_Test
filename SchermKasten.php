@@ -41,12 +41,15 @@ for ($Teller = 1; $Teller <= $_SESSION['AantalKasten']; $Teller++){     //teller
             $_SESSION['StatusKast'.$Teller] = "Leeg";
             $_SESSION['VorigeStatusKast'.$Teller] = "Vol";
         }
-
         //Verbinding naar de database (past 'in_de_kast' aan in de tabel 'kasten')
-        $inhoud = 0;        //in DB --> leeg=0, vol=1
-        if ($_SESSION['StatusKast'.$Teller] == "Vol") {
+        //$inhoud = 2;
+        if ($_SESSION['StatusKast'.$Teller] == "Vol" && $_SESSION['VorigeStatusKast'.$Teller] == "Leeg") {
             $inhoud = 1;
         }
+        if ($_SESSION['StatusKast'.$Teller] == "Leeg" && $_SESSION['VorigeStatusKast'.$Teller] == "Vol") {
+            $inhoud = 0;        //in DB --> leeg=0, vol=1
+        }
+
         if($link){
             $query = "update lockers_kasten set in_de_kast = ? where kastid = ?";
             $stmt = mysqli_stmt_init($link);

@@ -38,7 +38,7 @@ ob_end_flush();
         session_start();
         include "verbindingDB.php";
 
-        if ($stmt = $link->prepare('SELECT * FROM lockers_logboek')) { // Selecteer alles uit het logboek om te gebruiken in de tabel.
+        if ($stmt = $link->prepare('SELECT * FROM lockers_logboek ORDER BY logid DESC')) { // Selecteer alles uit het logboek om te gebruiken in de tabel.
             $stmt->execute();
             $Resultaat = mysqli_stmt_get_result($stmt);
 
@@ -48,6 +48,7 @@ ob_end_flush();
                     <tr>
                         <th>Log</th>
                         <th>Kast</th>
+                        <th>Kaststatus</th>
                         <th>Naam</th>
                         <th>Datum</th>
                         <th>Time</th>
@@ -55,7 +56,6 @@ ob_end_flush();
                     </tr>
                 </thead>
             ";
-
             while ($Row = mysqli_fetch_assoc($Resultaat)) {
                 $Badgenr = $Row['idgebruiker']; // Aparte variabele die als parameter dient om de voornaam en achternaam in de andere database gebruikers te vinden.
                 if ($stmt2 = $link->prepare('SELECT voornaam, achternaam FROM lockers_gebruikers WHERE gebruikerid = ?')) { // Aparte query voor het verkrijgen van de juiste volledige naam van de persoon rechststreeks uit de gebruikers database.
@@ -66,8 +66,12 @@ ob_end_flush();
 
                     $fullName = $userRow['voornaam'] . ' ' . $userRow['achternaam']; //We maken de variabele aan voor de volledige naam van de gebruiker te weergeven.
 
-                    $actie = $Row['actie'] == 1 ? 'Teruggebracht' : 'Weggenomen'; //Variabele voor het bepalen van de actie, word het item in de kast weggenomen of teruggebracht?
-                    //als gelijk aan 1 dan 'teruggebracht' anders weggenomen
+                    if ($Row['actie'] == 0) {
+                        $actie = 'Weggenomen';
+                    }
+                    if ($Row['actie'] == 1) {
+                        $actie = 'Teruggebracht';
+                    }
 
 
                     //Voeg de nieuwe kolommen toe met de nodige gegevens in de juiste tabelcellen.
