@@ -49,7 +49,6 @@ ob_end_flush();
                     <tr>
                         <th>Log</th>
                         <th>Kast</th>
-                        <th>Kaststatus</th>
                         <th>Naam</th>
                         <th>Datum</th>
                         <th>Time</th>
